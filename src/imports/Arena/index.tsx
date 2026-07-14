@@ -20,6 +20,14 @@ import imgImage60 from "./b80a103bc87ceb73f04fe33805150eb3193f423e.png";
 import imgImage61 from "./84c13f93648a5300f55ea4786dcfd8e7f0be9092.png";
 import imgBottomNavigationMobile from "./999dc029575f09683ae54053a49a9f69f397c899.png";
 import { imgGroup } from "./svg-vzcwu";
+import { useState } from "react";
+import { motion } from "motion/react";
+import { OddsButton } from "@/app/components/betting/OddsButton";
+
+type BottomMenuItemProps = {
+  active?: boolean;
+  onClick?: () => void;
+};
 
 function Menu() {
   return (
@@ -513,73 +521,24 @@ function Container1() {
 }
 
 function BetInputs() {
+  const marketId = "market-1";
+  const marketLabel = "Match Winner";
   return (
     <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full" data-name="bet inputs">
-      <div className="bg-[#070d18] flex-[1_0_0] h-[34px] min-w-px relative rounded-[8px]" data-name="Market Selection">
-        <div className="flex flex-row items-center justify-center size-full">
-          <div className="content-stretch flex items-center justify-between p-[8px] relative size-full">
-            <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[12px] whitespace-nowrap">
-              <p className="leading-[16px]">1</p>
-            </div>
-            <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[14px] text-center whitespace-nowrap">
-              <p className="leading-[18px]">5.50</p>
-            </div>
-            <div className="absolute flex items-center justify-center left-[4px] size-[12px] top-[4px]">
-              <div className="flex-none rotate-180">
-                <div className="relative rounded-[2px] size-[12px]" data-name="Markets Arrow Up">
-                  <div className="absolute inset-[11.77%_0_0_11.77%]">
-                    <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.5878 10.5878">
-                      <path d={svgPaths.p363a6400} fill="var(--fill-0, #5CE595)" id="triangle-down" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-[#070d18] flex-[1_0_0] h-[34px] min-w-px relative rounded-[8px]" data-name="Market Selection">
-        <div className="flex flex-row items-center justify-center size-full">
-          <div className="content-stretch flex items-center justify-between p-[8px] relative size-full">
-            <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[12px] whitespace-nowrap">
-              <p className="leading-[16px]">x</p>
-            </div>
-            <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[14px] text-center whitespace-nowrap">
-              <p className="leading-[18px]">0.30</p>
-            </div>
-            <div className="absolute flex items-center justify-center left-[4px] size-[12px] top-[4px]">
-              <div className="flex-none rotate-180">
-                <div className="opacity-0 relative rounded-[2px] size-[12px]" data-name="Markets Arrow Up">
-                  <div className="absolute inset-[11.77%_0_0_11.77%]">
-                    <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.5878 10.5878">
-                      <path d={svgPaths.p363a6400} fill="var(--fill-0, #5CE595)" id="triangle-down" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-[#070d18] flex-[1_0_0] h-[34px] min-w-px relative rounded-[8px]" data-name="Market Selection">
-        <div className="flex flex-row items-center justify-center size-full">
-          <div className="content-stretch flex items-center justify-between p-[8px] relative size-full">
-            <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[12px] whitespace-nowrap">
-              <p className="leading-[16px]">2</p>
-            </div>
-            <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[14px] text-center whitespace-nowrap">
-              <p className="leading-[18px]">3.10</p>
-            </div>
-            <div className="absolute bottom-[5px] opacity-0 right-[4px] rounded-[2px] size-[12px]" data-name="Markets Arrow Down">
-              <div className="absolute inset-[11.77%_0_0_11.77%]">
-                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.5878 10.5878">
-                  <path d={svgPaths.p363a6400} fill="var(--fill-0, #FF9457)" id="triangle-down" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <OddsButton
+        layout="horizontal"
+        trend="up"
+        selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
+      />
+      <OddsButton
+        layout="horizontal"
+        selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
+      />
+      <OddsButton
+        layout="horizontal"
+        trend="down"
+        selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
+      />
     </div>
   );
 }
@@ -4145,58 +4104,24 @@ function SelectionLine2() {
 }
 
 function Lines() {
+  const marketId = "market-lines-1";
+  const marketLabel = "Total Goals";
   return (
     <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Lines">
-      <div className="bg-[#070d18] flex-[1_0_0] h-[50px] min-w-[32px] relative rounded-[8px]" data-name="Market Selection">
-        <div className="flex flex-col items-center justify-center min-w-[inherit] size-full">
-          <div className="content-stretch flex flex-col gap-[4px] items-center justify-center min-w-[inherit] px-[4px] py-[8px] relative size-full">
-            <SelectionLine />
-            <div className="absolute flex items-center justify-center left-[4px] size-[12px] top-[4px]">
-              <div className="flex-none rotate-180">
-                <div className="relative rounded-[2px] size-[12px]" data-name="Markets Arrow Up">
-                  <div className="absolute inset-[11.77%_0_0_11.77%]">
-                    <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.5878 10.5878">
-                      <path d={svgPaths.p363a6400} fill="var(--fill-0, #5CE595)" id="triangle-down" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-[#070d18] flex-[1_0_0] h-[50px] min-w-[32px] relative rounded-[8px]" data-name="Market Selection">
-        <div className="flex flex-col items-center justify-center min-w-[inherit] size-full">
-          <div className="content-stretch flex flex-col gap-[4px] items-center justify-center min-w-[inherit] px-[4px] py-[8px] relative size-full">
-            <SelectionLine1 />
-            <div className="absolute flex items-center justify-center left-[4px] size-[12px] top-[4px]">
-              <div className="flex-none rotate-180">
-                <div className="opacity-0 relative rounded-[2px] size-[12px]" data-name="Markets Arrow Up">
-                  <div className="absolute inset-[11.77%_0_0_11.77%]">
-                    <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.5878 10.5878">
-                      <path d={svgPaths.p363a6400} fill="var(--fill-0, #5CE595)" id="triangle-down" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-[#070d18] flex-[1_0_0] h-[50px] min-w-[32px] relative rounded-[8px]" data-name="Market Selection">
-        <div className="flex flex-col items-center justify-center min-w-[inherit] size-full">
-          <div className="content-stretch flex flex-col gap-[4px] items-center justify-center min-w-[inherit] px-[4px] py-[8px] relative size-full">
-            <SelectionLine2 />
-            <div className="absolute bottom-[4px] opacity-0 right-[4px] rounded-[2px] size-[12px]" data-name="Markets Arrow Down">
-              <div className="absolute inset-[11.77%_0_0_11.77%]">
-                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.5878 10.5878">
-                  <path d={svgPaths.p363a6400} fill="var(--fill-0, #FF9457)" id="triangle-down" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <OddsButton
+        layout="vertical"
+        trend="up"
+        selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "0.5" }}
+      />
+      <OddsButton
+        layout="vertical"
+        selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.5" }}
+      />
+      <OddsButton
+        layout="vertical"
+        trend="down"
+        selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "0.5" }}
+      />
     </div>
   );
 }
@@ -9665,30 +9590,48 @@ function Layout() {
   );
 }
 
-function BottomMenuItems() {
+function BottomMenuItems({ active, onClick }: BottomMenuItemProps) {
+  const tint = active ? "#ff9457" : "#e5eafa";
   return (
-    <div className="content-stretch flex flex-col gap-[2px] h-[44px] items-center justify-center min-w-[44px] pt-[2px] relative shrink-0" data-name="Bottom Menu Items">
+    <motion.button
+      type="button"
+      onClick={onClick}
+      whileTap={{ scale: 0.88 }}
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 500, damping: 25 }}
+      className="content-stretch flex flex-col gap-[2px] h-[44px] items-center justify-center min-w-[44px] pt-[2px] relative shrink-0 cursor-pointer"
+      data-name="Bottom Menu Items"
+    >
       <div className="overflow-clip relative shrink-0 size-[24px]" data-name="BlackJack">
         <div className="absolute inset-[9.38%_10.42%]" data-name="Icon">
           <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 18.9993 19.5">
-            <path d={svgPaths.p2d87b680} fill="var(--fill-0, #E5EAFA)" id="Icon" />
+            <path d={svgPaths.p2d87b680} fill={`var(--fill-0, ${tint})`} id="Icon" />
           </svg>
         </div>
       </div>
-      <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[12px] text-center whitespace-nowrap">
+      <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-center whitespace-nowrap transition-colors" style={{ color: tint }}>
         <p className="leading-[16px]">Live Casino</p>
       </div>
-    </div>
+    </motion.button>
   );
 }
 
-function BottomMenuItems1() {
+function BottomMenuItems1({ active, onClick }: BottomMenuItemProps) {
+  const tint = active ? "#ff9457" : "#e5eafa";
   return (
-    <div className="content-stretch flex flex-col gap-[2px] h-[44px] items-center justify-center min-w-[44px] pt-[2px] relative shrink-0" data-name="Bottom Menu Items">
+    <motion.button
+      type="button"
+      onClick={onClick}
+      whileTap={{ scale: 0.88 }}
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 500, damping: 25 }}
+      className="content-stretch flex flex-col gap-[2px] h-[44px] items-center justify-center min-w-[44px] pt-[2px] relative shrink-0 cursor-pointer"
+      data-name="Bottom Menu Items"
+    >
       <div className="relative shrink-0 size-[24px]" data-name="Soccer">
         <div className="absolute inset-[8.33%_10.07%_8.33%_8.33%]" data-name="Icon">
           <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 19.584 20">
-            <path d={svgPaths.p391d780} fill="url(#paint0_linear_1_16926)" id="Icon" />
+            <path d={svgPaths.p391d780} fill={active ? "url(#paint0_linear_1_16926)" : "var(--fill-0, #e5eafa)"} id="Icon" />
             <defs>
               <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_1_16926" x1="10.5629" x2="11.1851" y1="-1.39593e-09" y2="19.9806">
                 <stop offset="0.5" stopColor="#FF9457" />
@@ -9698,67 +9641,94 @@ function BottomMenuItems1() {
           </svg>
         </div>
       </div>
-      <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#ff9457] text-[12px] text-center whitespace-nowrap">
+      <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-center whitespace-nowrap transition-colors" style={{ color: tint }}>
         <p className="leading-[16px]">Sports</p>
       </div>
-    </div>
+    </motion.button>
   );
 }
 
-function BottomMenuItems2() {
+function BottomMenuItems2({ active, onClick }: BottomMenuItemProps) {
+  const tint = active ? "#ff9457" : "#e5eafa";
   return (
-    <div className="content-stretch flex flex-col gap-[2px] h-[44px] items-center justify-center min-w-[44px] pt-[2px] relative shrink-0" data-name="Bottom Menu Items">
+    <motion.button
+      type="button"
+      onClick={onClick}
+      whileTap={{ scale: 0.88 }}
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 500, damping: 25 }}
+      className="content-stretch flex flex-col gap-[2px] h-[44px] items-center justify-center min-w-[44px] pt-[2px] relative shrink-0 cursor-pointer"
+      data-name="Bottom Menu Items"
+    >
       <div className="overflow-clip relative shrink-0 size-[24px]" data-name="Slots New">
         <div className="absolute inset-[3.13%_3.96%_6.25%_11.45%]" data-name="Icon">
           <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20.302 21.75">
-            <path d={svgPaths.p6dcda80} fill="var(--fill-0, #E5EAFA)" id="Icon" />
+            <path d={svgPaths.p6dcda80} fill={`var(--fill-0, ${tint})`} id="Icon" />
           </svg>
         </div>
       </div>
-      <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[12px] text-center whitespace-nowrap">
+      <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-center whitespace-nowrap transition-colors" style={{ color: tint }}>
         <p className="leading-[16px]">Slots</p>
       </div>
-    </div>
+    </motion.button>
   );
 }
 
-function Trophy() {
+function Trophy({ tint = "#e5eafa" }: { tint?: string }) {
   return (
     <div className="relative shrink-0 size-[24px]" data-name="Trophy">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
         <g id="Trophy">
-          <path d={svgPaths.peac3580} fill="var(--fill-0, #E5EAFA)" id="Subtract" />
+          <path d={svgPaths.peac3580} fill={`var(--fill-0, ${tint})`} id="Subtract" />
         </g>
       </svg>
     </div>
   );
 }
 
-function BottomMenuItems3() {
+function BottomMenuItems3({ active, onClick }: BottomMenuItemProps) {
+  const tint = active ? "#ff9457" : "#e5eafa";
   return (
-    <div className="content-stretch flex flex-col gap-[2px] h-[44px] items-center justify-center min-w-[44px] pt-[2px] relative shrink-0" data-name="Bottom Menu Items">
-      <Trophy />
-      <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[12px] text-center whitespace-nowrap">
+    <motion.button
+      type="button"
+      onClick={onClick}
+      whileTap={{ scale: 0.88 }}
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 500, damping: 25 }}
+      className="content-stretch flex flex-col gap-[2px] h-[44px] items-center justify-center min-w-[44px] pt-[2px] relative shrink-0 cursor-pointer"
+      data-name="Bottom Menu Items"
+    >
+      <Trophy tint={tint} />
+      <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-center whitespace-nowrap transition-colors" style={{ color: tint }}>
         <p className="leading-[16px]">Rewards</p>
       </div>
-    </div>
+    </motion.button>
   );
 }
 
-function BottomMenuItems4() {
+function BottomMenuItems4({ active, onClick }: BottomMenuItemProps) {
+  const tint = active ? "#ff9457" : "#e5eafa";
   return (
-    <div className="content-stretch flex flex-col gap-[2px] h-[44px] items-center justify-center min-w-[44px] pt-[2px] relative shrink-0" data-name="Bottom Menu Items">
+    <motion.button
+      type="button"
+      onClick={onClick}
+      whileTap={{ scale: 0.88 }}
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 500, damping: 25 }}
+      className="content-stretch flex flex-col gap-[2px] h-[44px] items-center justify-center min-w-[44px] pt-[2px] relative shrink-0 cursor-pointer"
+      data-name="Bottom Menu Items"
+    >
       <div className="overflow-clip relative shrink-0 size-[24px]" data-name="Search New">
         <div className="absolute inset-[12.5%]" data-name="Icon">
           <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 18.001 18">
-            <path d={svgPaths.p1b281800} fill="var(--fill-0, #E5EAFA)" id="Icon" />
+            <path d={svgPaths.p1b281800} fill={`var(--fill-0, ${tint})`} id="Icon" />
           </svg>
         </div>
       </div>
-      <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[12px] text-center whitespace-nowrap">
+      <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-center whitespace-nowrap transition-colors" style={{ color: tint }}>
         <p className="leading-[16px]">Search</p>
       </div>
-    </div>
+    </motion.button>
   );
 }
 
@@ -9771,27 +9741,37 @@ function Light1() {
   );
 }
 
+type ArenaTab = "casino" | "sports" | "slots" | "rewards" | "search";
+
 export default function Arena() {
+  const [activeTab, setActiveTab] = useState<ArenaTab>("sports");
+
   return (
     <div className="content-stretch flex flex-col items-center relative size-full" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 428 4150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.8999999761581421'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-22.45 96.416 -208.31 268.83 66 -19.862)'><stop stop-color='rgba(25,56,126,1)' offset='0'/><stop stop-color='rgba(20,41,86,0.5)' offset='0.42313'/><stop stop-color='rgba(14,25,45,0)' offset='0.84625'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(7, 13, 24) 0%, rgb(7, 13, 24) 100%)" }} data-name="Arena">
       <Frame7 />
       <Layout />
       <div className="absolute bottom-0 h-[4150px] left-1/2 pointer-events-none">
-        <div className="-translate-x-1/2 opacity-0 pointer-events-auto rounded-[100px] sticky top-0 w-[396px]" data-name="Bottom Navigation - Mobile">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.15 }}
+          className="-translate-x-1/2 pointer-events-auto rounded-[100px] sticky top-0 w-[396px]"
+          data-name="Bottom Navigation - Mobile"
+        >
           <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[100px]">
             <img alt="" className="absolute max-w-none object-cover rounded-[100px] size-full" src={imgBottomNavigationMobile} />
             <div className="absolute backdrop-blur-[75px] inset-0 rounded-[100px]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 396 60' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.5227e-13 6.0153 -48.171 3.3394e-13 198 -1.3722e-12)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.7)' offset='1'/></radialGradient></defs></svg>\")" }} />
           </div>
           <div className="content-stretch flex items-start justify-between overflow-clip px-[20px] py-[8px] relative rounded-[inherit] size-full">
-            <BottomMenuItems />
-            <BottomMenuItems1 />
-            <BottomMenuItems2 />
-            <BottomMenuItems3 />
-            <BottomMenuItems4 />
+            <BottomMenuItems active={activeTab === "casino"} onClick={() => setActiveTab("casino")} />
+            <BottomMenuItems1 active={activeTab === "sports"} onClick={() => setActiveTab("sports")} />
+            <BottomMenuItems2 active={activeTab === "slots"} onClick={() => setActiveTab("slots")} />
+            <BottomMenuItems3 active={activeTab === "rewards"} onClick={() => setActiveTab("rewards")} />
+            <BottomMenuItems4 active={activeTab === "search"} onClick={() => setActiveTab("search")} />
             <Light1 />
           </div>
           <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[100px]" />
-        </div>
+        </motion.div>
       </div>
     </div>
   );
