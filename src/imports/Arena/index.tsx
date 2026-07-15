@@ -2901,62 +2901,89 @@ function Number3() {
   );
 }
 
+function SportTabIcon() {
+  return (
+    <div className="relative shrink-0 size-[32px]" data-name="NBA">
+      <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[30px] top-1/2" data-name="ChatGPT Image Mar 26, 2026, 01_47_40 AM 7">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <img alt="" className="absolute h-[390%] left-[-69.13%] max-w-none top-[-221.87%] w-[585%]" src={imgChatGptImageMar262026014740Am7} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const SPORT_TAB_DEFAULT_BG =
+  "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 90 70' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(5.7335e-14 7.0178 -10.948 3.896e-13 45 -1.6009e-12)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)";
+const SPORT_TAB_HOVER_BG = "linear-gradient(180deg, rgba(25, 56, 126, 0.7) 0%, rgba(14, 25, 45, 0.7) 100%)";
+const SPORT_TAB_SELECTED_BG =
+  "linear-gradient(178.641deg, rgba(153, 56, 0, 0.7) 1.596%, rgba(77, 31, 5, 0.7) 98.637%), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)";
+
+function SportTab({
+  label,
+  count,
+  selected,
+  onSelect,
+}: {
+  label: string;
+  count: number;
+  selected: boolean;
+  onSelect: () => void;
+}) {
+  const [hovered, setHovered] = useState(false);
+  const background = selected ? SPORT_TAB_SELECTED_BG : hovered ? SPORT_TAB_HOVER_BG : SPORT_TAB_DEFAULT_BG;
+
+  return (
+    <motion.button
+      type="button"
+      onClick={onSelect}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      whileTap={{ scale: 0.95 }}
+      className="content-stretch flex flex-col gap-[4px] items-center px-[4px] py-[8px] relative rounded-[16px] shrink-0 w-[90px] transition-[background-image] duration-200 cursor-pointer"
+      style={{ backgroundImage: background }}
+      data-name="Tabs"
+      aria-pressed={selected}
+    >
+      {selected && <div aria-hidden className="absolute border border-[#e5eafa] border-solid inset-0 pointer-events-none rounded-[16px]" />}
+      <SportTabIcon />
+      <div
+        className={
+          "[word-break:break-word] flex flex-col justify-center leading-[0] overflow-hidden relative shrink-0 text-[14px] text-center text-ellipsis whitespace-nowrap not-italic " +
+          (selected ? "font-['Inter:Bold',sans-serif] font-bold text-[#f2f5fd]" : "font-['Inter:Medium',sans-serif] font-medium text-[#acafbb]")
+        }
+      >
+        <p className="leading-[18px]">{label}</p>
+      </div>
+      <div className="absolute bg-[#993800] content-stretch flex h-[20px] items-center justify-center left-0 px-[4px] rounded-br-[16px] rounded-tl-[16px] top-0 w-[32px]" data-name="number">
+        <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#f2f5fd] text-[12px] text-right whitespace-nowrap">
+          <p className="leading-[16px]">{count}</p>
+        </div>
+      </div>
+    </motion.button>
+  );
+}
+
 function SportFilter() {
+  const [selected, setSelected] = useState(1);
+  const sports = [
+    { label: "Soccer", count: 20 },
+    { label: "Basketball", count: 200 },
+    { label: "Volleyball", count: 20 },
+    { label: "Tennis", count: 20 },
+  ];
+
   return (
     <div className="content-stretch flex gap-[4px] items-center overflow-x-auto overflow-y-clip relative shrink-0 w-[340px]" data-name="Sport Filter">
-      <div className="content-stretch flex flex-col gap-[4px] items-center px-[4px] py-[8px] relative rounded-[16px] shrink-0 w-[90px]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 90 70' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(5.7335e-14 7.0178 -10.948 3.896e-13 45 -1.6009e-12)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Tabs">
-        <div className="relative shrink-0 size-[32px]" data-name="NBA">
-          <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[30px] top-1/2" data-name="ChatGPT Image Mar 26, 2026, 01_47_40 AM 7">
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img alt="" className="absolute h-[390%] left-[-69.13%] max-w-none top-[-221.87%] w-[585%]" src={imgChatGptImageMar262026014740Am7} />
-            </div>
-          </div>
-        </div>
-        <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[#acafbb] text-[14px] text-center text-ellipsis whitespace-nowrap">
-          <p className="leading-[18px]">Soccer</p>
-        </div>
-        <Number />
-      </div>
-      <div className="content-stretch flex flex-col gap-[4px] h-[70px] items-center justify-center px-[4px] py-[8px] relative rounded-[16px] shrink-0 w-[90px]" style={{ backgroundImage: "linear-gradient(178.641deg, rgba(153, 56, 0, 0.7) 1.596%, rgba(77, 31, 5, 0.7) 98.637%), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Tabs">
-        <div aria-hidden className="absolute border border-[#e5eafa] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <div className="relative shrink-0 size-[32px]" data-name="NBA">
-          <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[30px] top-1/2" data-name="ChatGPT Image Mar 26, 2026, 01_47_40 AM 7">
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img alt="" className="absolute h-[390%] left-[-69.13%] max-w-none top-[-221.87%] w-[585%]" src={imgChatGptImageMar262026014740Am7} />
-            </div>
-          </div>
-        </div>
-        <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[#f2f5fd] text-[14px] text-center text-ellipsis whitespace-nowrap">
-          <p className="leading-[18px]">{`Basketball `}</p>
-        </div>
-        <Number1 />
-      </div>
-      <div className="content-stretch flex flex-col gap-[4px] items-center px-[4px] py-[8px] relative rounded-[16px] shrink-0 w-[90px]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 90 70' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(5.7335e-14 7.0178 -10.948 3.896e-13 45 -1.6009e-12)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Tabs">
-        <div className="relative shrink-0 size-[32px]" data-name="NBA">
-          <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[30px] top-1/2" data-name="ChatGPT Image Mar 26, 2026, 01_47_40 AM 7">
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img alt="" className="absolute h-[390%] left-[-69.13%] max-w-none top-[-221.87%] w-[585%]" src={imgChatGptImageMar262026014740Am7} />
-            </div>
-          </div>
-        </div>
-        <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[#acafbb] text-[14px] text-center text-ellipsis whitespace-nowrap">
-          <p className="leading-[18px]">{`Volleyball `}</p>
-        </div>
-        <Number2 />
-      </div>
-      <div className="content-stretch flex flex-col gap-[4px] items-center px-[4px] py-[8px] relative rounded-[16px] shrink-0 w-[90px]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 90 70' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(5.7335e-14 7.0178 -10.948 3.896e-13 45 -1.6009e-12)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Tabs">
-        <div className="relative shrink-0 size-[32px]" data-name="NBA">
-          <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[30px] top-1/2" data-name="ChatGPT Image Mar 26, 2026, 01_47_40 AM 7">
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img alt="" className="absolute h-[390%] left-[-69.13%] max-w-none top-[-221.87%] w-[585%]" src={imgChatGptImageMar262026014740Am7} />
-            </div>
-          </div>
-        </div>
-        <div className="[word-break:break-word] flex flex-col font-['Inter:Medium',sans-serif] font-medium justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[#acafbb] text-[14px] text-center text-ellipsis whitespace-nowrap">
-          <p className="leading-[18px]">Tennis</p>
-        </div>
-        <Number3 />
-      </div>
+      {sports.map((sport, index) => (
+        <SportTab
+          key={sport.label}
+          label={sport.label}
+          count={sport.count}
+          selected={selected === index}
+          onSelect={() => setSelected(index)}
+        />
+      ))}
     </div>
   );
 }
