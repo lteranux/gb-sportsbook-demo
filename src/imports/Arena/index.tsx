@@ -7831,7 +7831,7 @@ function EventCards({ expanded, toggle }: { expanded: boolean[]; toggle: (index:
 }
 
 function GameCardPlayers() {
-  const [expanded, setExpanded] = useState<boolean[]>([true, false, false, true]);
+  const [expanded, setExpanded] = useState<boolean[]>([true, true, true, true]);
   const toggle = (index: number) => setExpanded((prev) => prev.map((v, i) => (i === index ? !v : v)));
   const allExpanded = expanded.every(Boolean);
   const toggleAll = () => setExpanded((prev) => prev.map(() => !allExpanded));
