@@ -1511,8 +1511,12 @@ function Content({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSel
         </div>
         <div aria-hidden className="absolute border-[#19387e] border-b border-solid inset-0 pointer-events-none" />
       </div>
-      <BannerCarousel />
-      <Dots />
+      {activeTopTab === "arena" && (
+        <>
+          <BannerCarousel />
+          <Dots />
+        </>
+      )}
       <Events />
       <div className="absolute bg-gradient-to-l from-[#070d18] h-[186px] left-[385px] to-[rgba(7,13,24,0)] top-[288px] w-[19px]" data-name="shadow" />
     </div>
