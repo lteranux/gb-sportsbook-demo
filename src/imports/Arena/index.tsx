@@ -20,7 +20,7 @@ import imgImage60 from "./b80a103bc87ceb73f04fe33805150eb3193f423e.png";
 import imgImage61 from "./84c13f93648a5300f55ea4786dcfd8e7f0be9092.png";
 import imgBottomNavigationMobile from "./999dc029575f09683ae54053a49a9f69f397c899.png";
 import { imgGroup } from "./svg-vzcwu";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { OddsButton } from "@/app/components/betting/OddsButton";
 
@@ -3628,31 +3628,39 @@ function LeagueItemHeading() {
   );
 }
 
-function ExpandableArrow() {
+function ExpandableArrow({ expanded, onClick }: { expanded: boolean; onClick: () => void }) {
   return (
     <div className="flex items-center justify-center relative shrink-0">
-      <div className="-scale-y-100 flex-none rotate-180">
-        <button className="content-stretch cursor-pointer flex items-center relative" data-name="Expandable Arrow">
-          <div className="overflow-clip relative shrink-0 size-[24px]" data-name="Up">
-            <div className="absolute bottom-[35.43%] left-1/4 right-1/4 top-[35.42%]" data-name="Vector">
-              <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 6.99792">
-                <path clipRule="evenodd" d={svgPaths.p38da2c00} fill="var(--fill-0, #E5EAFA)" fillRule="evenodd" id="Vector" />
-              </svg>
-            </div>
+      <motion.button
+        type="button"
+        onClick={onClick}
+        animate={{ rotate: expanded ? 0 : 180 }}
+        whileTap={{ scale: 0.85 }}
+        transition={{ type: "spring", stiffness: 400, damping: 28 }}
+        className="content-stretch cursor-pointer flex items-center relative"
+        data-name="Expandable Arrow"
+        aria-expanded={expanded}
+        aria-label={expanded ? "Collapse league" : "Expand league"}
+      >
+        <div className="overflow-clip relative shrink-0 size-[24px]" data-name="Up">
+          <div className="absolute bottom-[35.43%] left-1/4 right-1/4 top-[35.42%]" data-name="Vector">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 6.99792">
+              <path clipRule="evenodd" d={svgPaths.p38da2c00} fill="var(--fill-0, #E5EAFA)" fillRule="evenodd" id="Vector" />
+            </svg>
           </div>
-        </button>
-      </div>
+        </div>
+      </motion.button>
     </div>
   );
 }
 
-function LeagueItemHeadingExpandable() {
+function LeagueItemHeadingExpandable({ expanded, onToggle }: { expanded: boolean; onToggle: () => void }) {
   return (
     <div className="relative rounded-tl-[8px] rounded-tr-[8px] shrink-0 w-full" data-name="League Item Heading Expandable">
       <div className="flex flex-row items-center justify-center size-full">
         <div className="content-stretch flex items-center justify-between px-[12px] py-[8px] relative size-full">
           <LeagueItemHeading />
-          <ExpandableArrow />
+          <ExpandableArrow expanded={expanded} onClick={onToggle} />
         </div>
       </div>
     </div>
@@ -5368,31 +5376,39 @@ function LeagueItemHeading1() {
   );
 }
 
-function ExpandableArrow1() {
+function ExpandableArrow1({ expanded, onClick }: { expanded: boolean; onClick: () => void }) {
   return (
     <div className="flex items-center justify-center relative shrink-0">
-      <div className="flex-none rotate-180">
-        <button className="content-stretch cursor-pointer flex items-center relative" data-name="Expandable Arrow">
-          <div className="overflow-clip relative shrink-0 size-[24px]" data-name="Up">
-            <div className="absolute bottom-[35.43%] left-1/4 right-1/4 top-[35.42%]" data-name="Vector">
-              <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 6.99792">
-                <path clipRule="evenodd" d={svgPaths.p38da2c00} fill="var(--fill-0, #E5EAFA)" fillRule="evenodd" id="Vector" />
-              </svg>
-            </div>
+      <motion.button
+        type="button"
+        onClick={onClick}
+        animate={{ rotate: expanded ? 0 : 180 }}
+        whileTap={{ scale: 0.85 }}
+        transition={{ type: "spring", stiffness: 400, damping: 28 }}
+        className="content-stretch cursor-pointer flex items-center relative"
+        data-name="Expandable Arrow"
+        aria-expanded={expanded}
+        aria-label={expanded ? "Collapse league" : "Expand league"}
+      >
+        <div className="overflow-clip relative shrink-0 size-[24px]" data-name="Up">
+          <div className="absolute bottom-[35.43%] left-1/4 right-1/4 top-[35.42%]" data-name="Vector">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 6.99792">
+              <path clipRule="evenodd" d={svgPaths.p38da2c00} fill="var(--fill-0, #E5EAFA)" fillRule="evenodd" id="Vector" />
+            </svg>
           </div>
-        </button>
-      </div>
+        </div>
+      </motion.button>
     </div>
   );
 }
 
-function LeagueItemHeadingExpandable1() {
+function LeagueItemHeadingExpandable1({ expanded, onToggle }: { expanded: boolean; onToggle: () => void }) {
   return (
     <div className="relative rounded-tl-[8px] rounded-tr-[8px] shrink-0 w-full" data-name="League Item Heading Expandable">
       <div className="flex flex-row items-center justify-center size-full">
         <div className="content-stretch flex items-center justify-between px-[12px] py-[8px] relative size-full">
           <LeagueItemHeading1 />
-          <ExpandableArrow1 />
+          <ExpandableArrow1 expanded={expanded} onClick={onToggle} />
         </div>
       </div>
     </div>
@@ -5944,31 +5960,39 @@ function LeagueItemHeading2() {
   );
 }
 
-function ExpandableArrow2() {
+function ExpandableArrow2({ expanded, onClick }: { expanded: boolean; onClick: () => void }) {
   return (
     <div className="flex items-center justify-center relative shrink-0">
-      <div className="flex-none rotate-180">
-        <button className="content-stretch cursor-pointer flex items-center relative" data-name="Expandable Arrow">
-          <div className="overflow-clip relative shrink-0 size-[24px]" data-name="Up">
-            <div className="absolute bottom-[35.43%] left-1/4 right-1/4 top-[35.42%]" data-name="Vector">
-              <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 6.99792">
-                <path clipRule="evenodd" d={svgPaths.p38da2c00} fill="var(--fill-0, #E5EAFA)" fillRule="evenodd" id="Vector" />
-              </svg>
-            </div>
+      <motion.button
+        type="button"
+        onClick={onClick}
+        animate={{ rotate: expanded ? 0 : 180 }}
+        whileTap={{ scale: 0.85 }}
+        transition={{ type: "spring", stiffness: 400, damping: 28 }}
+        className="content-stretch cursor-pointer flex items-center relative"
+        data-name="Expandable Arrow"
+        aria-expanded={expanded}
+        aria-label={expanded ? "Collapse league" : "Expand league"}
+      >
+        <div className="overflow-clip relative shrink-0 size-[24px]" data-name="Up">
+          <div className="absolute bottom-[35.43%] left-1/4 right-1/4 top-[35.42%]" data-name="Vector">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 6.99792">
+              <path clipRule="evenodd" d={svgPaths.p38da2c00} fill="var(--fill-0, #E5EAFA)" fillRule="evenodd" id="Vector" />
+            </svg>
           </div>
-        </button>
-      </div>
+        </div>
+      </motion.button>
     </div>
   );
 }
 
-function LeagueItemHeadingExpandable2() {
+function LeagueItemHeadingExpandable2({ expanded, onToggle }: { expanded: boolean; onToggle: () => void }) {
   return (
     <div className="relative rounded-tl-[8px] rounded-tr-[8px] shrink-0 w-full" data-name="League Item Heading Expandable">
       <div className="flex flex-row items-center justify-center size-full">
         <div className="content-stretch flex items-center justify-between px-[12px] py-[8px] relative size-full">
           <LeagueItemHeading2 />
-          <ExpandableArrow2 />
+          <ExpandableArrow2 expanded={expanded} onClick={onToggle} />
         </div>
       </div>
     </div>
@@ -6520,31 +6544,39 @@ function LeagueItemHeading3() {
   );
 }
 
-function ExpandableArrow3() {
+function ExpandableArrow3({ expanded, onClick }: { expanded: boolean; onClick: () => void }) {
   return (
     <div className="flex items-center justify-center relative shrink-0">
-      <div className="-scale-y-100 flex-none rotate-180">
-        <button className="content-stretch cursor-pointer flex items-center relative" data-name="Expandable Arrow">
-          <div className="overflow-clip relative shrink-0 size-[24px]" data-name="Up">
-            <div className="absolute bottom-[35.43%] left-1/4 right-1/4 top-[35.42%]" data-name="Vector">
-              <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 6.99792">
-                <path clipRule="evenodd" d={svgPaths.p38da2c00} fill="var(--fill-0, #E5EAFA)" fillRule="evenodd" id="Vector" />
-              </svg>
-            </div>
+      <motion.button
+        type="button"
+        onClick={onClick}
+        animate={{ rotate: expanded ? 0 : 180 }}
+        whileTap={{ scale: 0.85 }}
+        transition={{ type: "spring", stiffness: 400, damping: 28 }}
+        className="content-stretch cursor-pointer flex items-center relative"
+        data-name="Expandable Arrow"
+        aria-expanded={expanded}
+        aria-label={expanded ? "Collapse league" : "Expand league"}
+      >
+        <div className="overflow-clip relative shrink-0 size-[24px]" data-name="Up">
+          <div className="absolute bottom-[35.43%] left-1/4 right-1/4 top-[35.42%]" data-name="Vector">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 6.99792">
+              <path clipRule="evenodd" d={svgPaths.p38da2c00} fill="var(--fill-0, #E5EAFA)" fillRule="evenodd" id="Vector" />
+            </svg>
           </div>
-        </button>
-      </div>
+        </div>
+      </motion.button>
     </div>
   );
 }
 
-function LeagueItemHeadingExpandable3() {
+function LeagueItemHeadingExpandable3({ expanded, onToggle }: { expanded: boolean; onToggle: () => void }) {
   return (
     <div className="relative rounded-tl-[8px] rounded-tr-[8px] shrink-0 w-full" data-name="League Item Heading Expandable">
       <div className="flex flex-row items-center justify-center size-full">
         <div className="content-stretch flex items-center justify-between px-[12px] py-[8px] relative size-full">
           <LeagueItemHeading3 />
-          <ExpandableArrow3 />
+          <ExpandableArrow3 expanded={expanded} onClick={onToggle} />
         </div>
       </div>
     </div>
@@ -7688,26 +7720,58 @@ function SelectionLineGrid5() {
   );
 }
 
+function AccordionBody({ expanded, children }: { expanded: boolean; children: ReactNode }) {
+  return (
+    <div
+      className="grid w-full transition-[grid-template-rows] duration-300 ease-in-out"
+      style={{ gridTemplateRows: expanded ? "1fr" : "0fr" }}
+    >
+      <div className="overflow-hidden min-h-0">{children}</div>
+    </div>
+  );
+}
+
+function NoLeagueMatches() {
+  return (
+    <div className="px-[12px] pb-[16px] pt-[4px] text-[#acafbb] text-[12px]" data-name="No matches">
+      No live matches in this league right now.
+    </div>
+  );
+}
+
 function EventCards() {
+  const [expanded, setExpanded] = useState<boolean[]>([true, false, false, true]);
+  const toggle = (index: number) => setExpanded((prev) => prev.map((v, i) => (i === index ? !v : v)));
+
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Cards">
       <div className="bg-[#0e192d] content-stretch flex flex-col items-start min-w-[312px] relative rounded-[16px] shrink-0 w-full" data-name="Event Card">
         <div aria-hidden className="absolute border border-[#17274b] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <LeagueItemHeadingExpandable />
-        <SelectionLineGrid />
+        <LeagueItemHeadingExpandable expanded={expanded[0]} onToggle={() => toggle(0)} />
+        <AccordionBody expanded={expanded[0]}>
+          <SelectionLineGrid />
+        </AccordionBody>
       </div>
       <div className="bg-[#0e192d] content-stretch flex flex-col items-start min-w-[312px] relative rounded-[16px] shrink-0 w-full" data-name="Event Card">
         <div aria-hidden className="absolute border border-[#17274b] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <LeagueItemHeadingExpandable1 />
+        <LeagueItemHeadingExpandable1 expanded={expanded[1]} onToggle={() => toggle(1)} />
+        <AccordionBody expanded={expanded[1]}>
+          <NoLeagueMatches />
+        </AccordionBody>
       </div>
       <div className="bg-[#0e192d] content-stretch flex flex-col items-start min-w-[312px] relative rounded-[16px] shrink-0 w-full" data-name="Event Card">
         <div aria-hidden className="absolute border border-[#17274b] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <LeagueItemHeadingExpandable2 />
+        <LeagueItemHeadingExpandable2 expanded={expanded[2]} onToggle={() => toggle(2)} />
+        <AccordionBody expanded={expanded[2]}>
+          <NoLeagueMatches />
+        </AccordionBody>
       </div>
       <div className="bg-[#0e192d] content-stretch flex flex-col items-start min-w-[312px] relative rounded-[16px] shrink-0 w-full" data-name="Event Card">
         <div aria-hidden className="absolute border border-[#17274b] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <LeagueItemHeadingExpandable3 />
-        <SelectionLineGrid5 />
+        <LeagueItemHeadingExpandable3 expanded={expanded[3]} onToggle={() => toggle(3)} />
+        <AccordionBody expanded={expanded[3]}>
+          <SelectionLineGrid5 />
+        </AccordionBody>
       </div>
     </div>
   );
