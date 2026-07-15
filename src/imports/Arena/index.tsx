@@ -3030,7 +3030,7 @@ function Text9() {
   );
 }
 
-function Sort1() {
+function Sort1({ allExpanded, onToggleAll }: { allExpanded: boolean; onToggleAll: () => void }) {
   return (
     <div className="content-stretch flex gap-[4px] items-center relative self-stretch shrink-0" data-name="Sort">
       <div className="content-stretch flex gap-[4px] h-[32px] items-center justify-center pl-[16px] pr-[8px] py-[8px] relative rounded-[16px] shrink-0" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 124 32' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(7.8995e-14 3.2081 -15.084 1.781e-13 62 -7.3186e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(23, 39, 75) 0%, rgb(23, 39, 75) 100%)" }} data-name="Dropdown">
@@ -3044,9 +3044,23 @@ function Sort1() {
           </div>
         </div>
       </div>
-      <div className="content-stretch flex items-center justify-center px-[16px] py-[8px] relative rounded-[16px] shrink-0 size-[32px]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.0386e-14 3.2081 -3.8926 1.781e-13 16 -7.3186e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(23, 39, 75) 0%, rgb(23, 39, 75) 100%)" }} data-name="Icon Accordions">
+      <motion.button
+        type="button"
+        onClick={onToggleAll}
+        whileTap={{ scale: 0.9 }}
+        className="content-stretch flex items-center justify-center px-[16px] py-[8px] relative rounded-[16px] shrink-0 size-[32px] cursor-pointer"
+        style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.0386e-14 3.2081 -3.8926 1.781e-13 16 -7.3186e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(23, 39, 75) 0%, rgb(23, 39, 75) 100%)" }}
+        data-name="Icon Accordions"
+        aria-label={allExpanded ? "Collapse all leagues" : "Expand all leagues"}
+        aria-pressed={allExpanded}
+      >
         <div aria-hidden className="absolute border border-[#17274b] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Collapse all">
+        <motion.div
+          animate={{ rotate: allExpanded ? 180 : 0 }}
+          transition={{ type: "spring", stiffness: 400, damping: 28 }}
+          className="overflow-clip relative shrink-0 size-[16px]"
+          data-name="Collapse all"
+        >
           <div className="absolute inset-[12.69%_11.95%_15.44%_12.96%]" data-name="Icon">
             <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12.0142 11.4998">
               <g id="Icon">
@@ -3055,13 +3069,13 @@ function Sort1() {
               </g>
             </svg>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.button>
     </div>
   );
 }
 
-function Sort() {
+function Sort({ allExpanded, onToggleAll }: { allExpanded: boolean; onToggleAll: () => void }) {
   return (
     <div className="content-stretch flex items-start justify-between relative shrink-0 w-full" data-name="Sort">
       <div className="content-stretch flex h-[32px] items-center justify-center p-[2px] relative rounded-[100px] shrink-0" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 108 32' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(6.8802e-14 3.2081 -13.137 1.781e-13 54 -7.3186e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(23, 39, 75) 0%, rgb(23, 39, 75) 100%)" }} data-name="Switcher secondary">
@@ -3078,7 +3092,7 @@ function Sort() {
         </div>
         <Group8 />
       </div>
-      <Sort1 />
+      <Sort1 allExpanded={allExpanded} onToggleAll={onToggleAll} />
     </div>
   );
 }
@@ -7739,10 +7753,7 @@ function NoLeagueMatches() {
   );
 }
 
-function EventCards() {
-  const [expanded, setExpanded] = useState<boolean[]>([true, false, false, true]);
-  const toggle = (index: number) => setExpanded((prev) => prev.map((v, i) => (i === index ? !v : v)));
-
+function EventCards({ expanded, toggle }: { expanded: boolean[]; toggle: (index: number) => void }) {
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Cards">
       <div className="bg-[#0e192d] content-stretch flex flex-col items-start min-w-[312px] relative rounded-[16px] shrink-0 w-full" data-name="Event Card">
@@ -7778,6 +7789,11 @@ function EventCards() {
 }
 
 function GameCardPlayers() {
+  const [expanded, setExpanded] = useState<boolean[]>([true, false, false, true]);
+  const toggle = (index: number) => setExpanded((prev) => prev.map((v, i) => (i === index ? !v : v)));
+  const allExpanded = expanded.every(Boolean);
+  const toggleAll = () => setExpanded((prev) => prev.map(() => !allExpanded));
+
   return (
     <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full" data-name="Game Card Players">
       <LiveWinningsTitle1 />
@@ -7786,8 +7802,8 @@ function GameCardPlayers() {
         <Container11 />
       </div>
       <div className="content-stretch flex flex-col gap-[16px] items-start min-w-[312px] relative shrink-0 w-[380px]" data-name="Matches Feed">
-        <Sort />
-        <EventCards />
+        <Sort allExpanded={allExpanded} onToggleAll={toggleAll} />
+        <EventCards expanded={expanded} toggle={toggle} />
       </div>
       <div className="absolute bg-gradient-to-l from-[#070d18] h-[62px] left-[385px] to-[rgba(7,13,24,0)] top-[82px] w-[19px]" data-name="shadow" />
       <div className="absolute bg-gradient-to-l from-[#070d18] h-[34px] left-[385px] to-[rgba(7,13,24,0)] top-[36px] w-[19px]" data-name="shadow" />
