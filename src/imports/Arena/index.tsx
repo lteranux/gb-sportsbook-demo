@@ -3812,7 +3812,7 @@ function EventInfo1() {
 
 function SelectionLineGrid1() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center min-w-[159px] relative shrink-0" data-name="Selection Line Grid">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter5 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo />
@@ -4103,7 +4103,7 @@ function EventInfo3() {
 
 function SelectionLineGrid2() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center min-w-[159px] relative shrink-0" data-name="Selection Line Grid">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter6 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo2 />
@@ -4383,7 +4383,7 @@ function EventInfo5() {
 
 function SelectionLineGrid3() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center min-w-[159px] relative shrink-0" data-name="Selection Line Grid">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter7 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo4 />
@@ -4663,7 +4663,7 @@ function EventInfo7() {
 
 function SelectionLineGrid4() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center min-w-[159px] relative shrink-0" data-name="Selection Line Grid">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter8 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo6 />
@@ -6728,7 +6728,7 @@ function EventInfo9() {
 
 function SelectionLineGrid6() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center min-w-[159px] relative shrink-0" data-name="Selection Line Grid">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter9 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo8 />
@@ -6992,7 +6992,7 @@ function EventInfo11() {
 
 function SelectionLineGrid7() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center min-w-[159px] relative shrink-0" data-name="Selection Line Grid">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter10 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo10 />
@@ -7272,7 +7272,7 @@ function EventInfo13() {
 
 function SelectionLineGrid8() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center min-w-[159px] relative shrink-0" data-name="Selection Line Grid">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter11 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo12 />
@@ -7552,7 +7552,7 @@ function EventInfo15() {
 
 function SelectionLineGrid9() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center min-w-[159px] relative shrink-0" data-name="Selection Line Grid">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter12 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo14 />
