@@ -30,6 +30,8 @@ type BottomMenuItemProps = {
   onClick?: () => void;
 };
 
+type TopTab = "arena" | "live" | "prematch";
+
 function Menu() {
   return (
     <div className="relative shrink-0 size-[24px]" data-name="Menu">
@@ -181,107 +183,102 @@ function Frame7() {
   );
 }
 
-function HorizontalContainer() {
+function HorizontalContainer({ active }: { active: boolean }) {
+  const tint = active ? "#ff9457" : "#e5eafa";
   return (
     <div className="content-stretch flex gap-[4px] items-center px-[4px] relative shrink-0" data-name="Horizontal Container">
       <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Stadium">
         <div className="absolute inset-[6.25%_6.25%_7.65%_6.25%]" data-name="Vector">
           <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 14 13.7763">
-            <path d={svgPaths.p2402b900} fill="var(--fill-0, #FF9457)" id="Vector" />
+            <path d={svgPaths.p2402b900} fill={`var(--fill-0, ${tint})`} id="Vector" />
           </svg>
         </div>
       </div>
-      <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#ff9457] text-[14px] text-center whitespace-nowrap">
+      <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center transition-colors whitespace-nowrap" style={{ color: tint }}>
         <p className="leading-[18px]">Arena</p>
       </div>
     </div>
   );
 }
 
-function Highlight() {
-  return (
-    <div className="content-stretch flex flex-col h-[11px] items-start relative shrink-0 w-full" data-name="Highlight">
-      <div className="blur-[5px] h-[8px] relative shrink-0 w-full" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 77 8' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-3.5429e-7 -0.38095 4.3148 -2.6075e-7 38.5 8)'><stop stop-color='rgba(255,148,87,1)' offset='0'/><stop stop-color='rgba(255,148,87,0)' offset='1'/></radialGradient></defs></svg>\")" }} data-name="Line highlight" />
-      <div className="bg-gradient-to-l from-[rgba(255,148,87,0)] h-[2px] relative rounded-tl-[100px] rounded-tr-[8px] shrink-0 to-[rgba(255,148,87,0)] via-1/2 via-[#ff9457] w-full" data-name="Line highlight" />
-    </div>
-  );
-}
-
-function HorizontalContainer1() {
+function HorizontalContainer1({ active }: { active: boolean }) {
+  const tint = active ? "#ff9457" : "#e5eafa";
   return (
     <div className="content-stretch flex gap-[4px] items-center px-[4px] relative shrink-0" data-name="Horizontal Container">
       <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Live">
         <div className="absolute inset-[12.47%_6.32%_12.44%_6.32%]" data-name="Icon">
           <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.9769 12.0142">
-            <path d={svgPaths.p5f4e300} fill="var(--fill-0, #E5EAFA)" id="Icon" />
+            <path d={svgPaths.p5f4e300} fill={`var(--fill-0, ${tint})`} id="Icon" />
           </svg>
         </div>
       </div>
-      <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[14px] text-center whitespace-nowrap">
+      <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center transition-colors whitespace-nowrap" style={{ color: tint }}>
         <p className="leading-[18px]">Live</p>
       </div>
     </div>
   );
 }
 
-function Highlight1() {
-  return (
-    <div className="flex items-center justify-center relative shrink-0">
-      <div className="-scale-y-100 flex-none rotate-180">
-        <div className="content-stretch flex flex-col h-[11px] items-start opacity-0 relative w-0" data-name="Highlight">
-          <div className="blur-[5px] h-[8px] relative shrink-0 w-[77px]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 77 8' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-3.5429e-7 -0.38095 4.3148 -2.6075e-7 38.5 8)'><stop stop-color='rgba(255,148,87,1)' offset='0'/><stop stop-color='rgba(255,148,87,0)' offset='1'/></radialGradient></defs></svg>\")" }} data-name="Line highlight" />
-          <div className="bg-gradient-to-l from-[rgba(255,148,87,0)] h-[2px] relative rounded-tl-[100px] rounded-tr-[8px] shrink-0 to-[rgba(255,148,87,0)] via-1/2 via-[#ff9457] w-[77px]" data-name="Line highlight" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function HorizontalContainer2() {
+function HorizontalContainer2({ active }: { active: boolean }) {
+  const tint = active ? "#ff9457" : "#e5eafa";
   return (
     <div className="content-stretch flex gap-[4px] items-center px-[4px] relative shrink-0" data-name="Horizontal Container">
       <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Prematch Calendar">
         <div className="absolute inset-[12.5%]" data-name="Icon">
           <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 12">
-            <path d={svgPaths.pf88d80} fill="var(--fill-0, #E5EAFA)" id="Icon" />
+            <path d={svgPaths.pf88d80} fill={`var(--fill-0, ${tint})`} id="Icon" />
           </svg>
         </div>
       </div>
-      <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#e5eafa] text-[14px] text-center whitespace-nowrap">
+      <div className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center transition-colors whitespace-nowrap" style={{ color: tint }}>
         <p className="leading-[18px]">Prematch</p>
       </div>
     </div>
   );
 }
 
-function Highlight2() {
+function TabHighlight({ active }: { active: boolean }) {
   return (
-    <div className="flex items-center justify-center relative shrink-0">
-      <div className="-scale-y-100 flex-none rotate-180">
-        <div className="content-stretch flex flex-col h-[11px] items-start opacity-0 relative w-0" data-name="Highlight">
-          <div className="blur-[5px] h-[8px] relative shrink-0 w-[77px]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 77 8' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-3.5429e-7 -0.38095 4.3148 -2.6075e-7 38.5 8)'><stop stop-color='rgba(255,148,87,1)' offset='0'/><stop stop-color='rgba(255,148,87,0)' offset='1'/></radialGradient></defs></svg>\")" }} data-name="Line highlight" />
-          <div className="bg-gradient-to-l from-[rgba(255,148,87,0)] h-[2px] relative rounded-tl-[100px] rounded-tr-[8px] shrink-0 to-[rgba(255,148,87,0)] via-1/2 via-[#ff9457] w-[77px]" data-name="Line highlight" />
-        </div>
-      </div>
+    <div
+      className={`content-stretch flex flex-col h-[11px] items-start relative shrink-0 w-full transition-opacity duration-200 ${active ? "opacity-100" : "opacity-0"}`}
+      data-name="Highlight"
+    >
+      <div className="blur-[5px] h-[8px] relative shrink-0 w-full" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 77 8' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-3.5429e-7 -0.38095 4.3148 -2.6075e-7 38.5 8)'><stop stop-color='rgba(255,148,87,1)' offset='0'/><stop stop-color='rgba(255,148,87,0)' offset='1'/></radialGradient></defs></svg>\")" }} data-name="Line highlight" />
+      <div className="bg-gradient-to-l from-[rgba(255,148,87,0)] h-[2px] relative rounded-tl-[100px] rounded-tr-[8px] shrink-0 to-[rgba(255,148,87,0)] via-1/2 via-[#ff9457] w-full" data-name="Line highlight" />
     </div>
   );
 }
 
-function Container() {
+function Container({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelectTopTab: (tab: TopTab) => void }) {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0 w-full" data-name="Container">
-      <div className="content-stretch flex flex-[1_0_0] flex-col h-[40px] items-center justify-end min-w-px relative" data-name="Tabs New - Sports">
-        <HorizontalContainer />
-        <Highlight />
-      </div>
-      <div className="content-stretch flex flex-[1_0_0] flex-col h-[40px] items-center justify-end min-w-px relative" data-name="Tabs New - Sports">
-        <HorizontalContainer1 />
-        <Highlight1 />
-      </div>
-      <div className="content-stretch flex flex-[1_0_0] flex-col h-[40px] items-center justify-end min-w-px relative" data-name="Tabs New - Sports">
-        <HorizontalContainer2 />
-        <Highlight2 />
-      </div>
+      <button
+        type="button"
+        onClick={() => onSelectTopTab("arena")}
+        className="content-stretch flex flex-[1_0_0] flex-col h-[40px] items-center justify-end min-w-px relative cursor-pointer"
+        data-name="Tabs New - Sports"
+      >
+        <HorizontalContainer active={activeTopTab === "arena"} />
+        <TabHighlight active={activeTopTab === "arena"} />
+      </button>
+      <button
+        type="button"
+        onClick={() => onSelectTopTab("live")}
+        className="content-stretch flex flex-[1_0_0] flex-col h-[40px] items-center justify-end min-w-px relative cursor-pointer"
+        data-name="Tabs New - Sports"
+      >
+        <HorizontalContainer1 active={activeTopTab === "live"} />
+        <TabHighlight active={activeTopTab === "live"} />
+      </button>
+      <button
+        type="button"
+        onClick={() => onSelectTopTab("prematch")}
+        className="content-stretch flex flex-[1_0_0] flex-col h-[40px] items-center justify-end min-w-px relative cursor-pointer"
+        data-name="Tabs New - Sports"
+      >
+        <HorizontalContainer2 active={activeTopTab === "prematch"} />
+        <TabHighlight active={activeTopTab === "prematch"} />
+      </button>
     </div>
   );
 }
@@ -1505,12 +1502,12 @@ function Events() {
   );
 }
 
-function Content() {
+function Content({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelectTopTab: (tab: TopTab) => void }) {
   return (
     <div className="content-stretch flex flex-col gap-[20px] items-center relative shrink-0 w-full" data-name="Content">
       <div className="relative shrink-0 w-[428px]" data-name="Tab Navigation - Sports">
         <div className="content-stretch flex flex-col items-start overflow-x-auto overflow-y-clip px-[16px] relative rounded-[inherit] size-full">
-          <Container />
+          <Container activeTopTab={activeTopTab} onSelectTopTab={onSelectTopTab} />
         </div>
         <div aria-hidden className="absolute border-[#19387e] border-b border-solid inset-0 pointer-events-none" />
       </div>
@@ -9195,22 +9192,26 @@ function FooterNewColoredIcons() {
   );
 }
 
-function Body() {
+function Body({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelectTopTab: (tab: TopTab) => void }) {
   return (
     <div className="content-stretch flex flex-col gap-[32px] items-center relative shrink-0 w-full" data-name="Body">
-      <Content />
-      <Frame9 />
-      <button className="block cursor-pointer h-[362px] relative shrink-0 w-[428px]" data-name="Supper Odds Swipe">
-        <SuperOdds />
-        <Lightning />
-        <div className="-translate-x-1/2 absolute h-[91px] left-[calc(50%+143.5px)] overflow-clip top-[-22px] w-[86px]" data-name="Icon">
-          <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[76px] left-[calc(50%+0.5px)] top-[calc(50%+0.5px)] w-[73px]" data-name="Lightning icon">
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img alt="" className="absolute h-[118.31%] left-[-44.88%] max-w-none top-[-7.04%] w-[185.94%]" src={imgLightningIcon} />
+      <Content activeTopTab={activeTopTab} onSelectTopTab={onSelectTopTab} />
+      {activeTopTab === "arena" && (
+        <>
+          <Frame9 />
+          <button className="block cursor-pointer h-[362px] relative shrink-0 w-[428px]" data-name="Supper Odds Swipe">
+            <SuperOdds />
+            <Lightning />
+            <div className="-translate-x-1/2 absolute h-[91px] left-[calc(50%+143.5px)] overflow-clip top-[-22px] w-[86px]" data-name="Icon">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[76px] left-[calc(50%+0.5px)] top-[calc(50%+0.5px)] w-[73px]" data-name="Lightning icon">
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  <img alt="" className="absolute h-[118.31%] left-[-44.88%] max-w-none top-[-7.04%] w-[185.94%]" src={imgLightningIcon} />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </button>
+          </button>
+        </>
+      )}
       <GameCardPlayers />
       <Parnetships />
       <FooterNewColoredIcons />
@@ -9218,11 +9219,11 @@ function Body() {
   );
 }
 
-function Layout() {
+function Layout({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelectTopTab: (tab: TopTab) => void }) {
   return (
     <div className="relative shrink-0 w-full" data-name="Layout">
       <div className="content-stretch flex flex-col items-start px-[24px] relative size-full">
-        <Body />
+        <Body activeTopTab={activeTopTab} onSelectTopTab={onSelectTopTab} />
       </div>
     </div>
   );
@@ -9383,12 +9384,13 @@ type ArenaTab = "casino" | "sports" | "slots" | "rewards" | "search";
 
 export default function Arena() {
   const [activeTab, setActiveTab] = useState<ArenaTab>("sports");
+  const [activeTopTab, setActiveTopTab] = useState<TopTab>("arena");
 
   return (
     <div className="content-stretch flex flex-col items-center relative size-full" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 428 4150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.8999999761581421'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-22.45 96.416 -208.31 268.83 66 -19.862)'><stop stop-color='rgba(25,56,126,1)' offset='0'/><stop stop-color='rgba(20,41,86,0.5)' offset='0.42313'/><stop stop-color='rgba(14,25,45,0)' offset='0.84625'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(7, 13, 24) 0%, rgb(7, 13, 24) 100%)" }} data-name="Arena">
       <ResponsiveCanvas designWidth={428}>
         <Frame7 />
-        <Layout />
+        <Layout activeTopTab={activeTopTab} onSelectTopTab={setActiveTopTab} />
       </ResponsiveCanvas>
       <motion.div
         initial={{ opacity: 0, y: 16 }}
