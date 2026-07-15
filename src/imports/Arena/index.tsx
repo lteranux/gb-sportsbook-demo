@@ -2997,40 +2997,56 @@ function Sports() {
   );
 }
 
+const LEAGUE_TAB_DEFAULT_BG =
+  "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 101 34' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(6.4343e-14 3.4086 -12.286 1.8923e-13 50.5 -7.776e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)";
+const LEAGUE_TAB_HOVER_BG =
+  "linear-gradient(179.412deg, rgba(255, 148, 87, 0.3) 1.596%, rgba(153, 56, 0, 0.3) 98.637%), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)";
+const LEAGUE_TAB_SELECTED_BG =
+  "linear-gradient(179.412deg, rgba(255, 148, 87, 0.8) 1.596%, rgba(153, 56, 0, 0.8) 98.637%), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)";
+
+function LeagueTab({ label, selected, fill }: { label: string; selected: boolean; fill?: boolean }) {
+  const [hovered, setHovered] = useState(false);
+  const background = selected ? LEAGUE_TAB_SELECTED_BG : hovered ? LEAGUE_TAB_HOVER_BG : LEAGUE_TAB_DEFAULT_BG;
+
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={
+        "content-stretch flex gap-[4px] h-[34px] items-center justify-center max-w-[200px] px-[16px] py-[8px] relative rounded-[16px] snap-start transition-[background-image] duration-200 cursor-pointer " +
+        (fill ? "flex-1 min-w-[101px]" : "shrink-0 w-fit")
+      }
+      style={{ backgroundImage: background }}
+      data-name="Tabs New - Sports"
+    >
+      {selected && <div aria-hidden className="absolute border border-[#e5eafa] border-solid inset-0 pointer-events-none rounded-[16px]" />}
+      <div
+        className={
+          "[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] min-w-px not-italic relative text-[14px] text-center whitespace-nowrap " +
+          (selected ? "text-[#e5eafa]" : "text-[#acafbb]")
+        }
+      >
+        <p className="leading-[18px]">{label}</p>
+      </div>
+    </div>
+  );
+}
+
 function Container11() {
+  const leagueTabs = [
+    { label: "Top League (45)", selected: true },
+    { label: "European Games", selected: false },
+    { label: "South America", selected: false },
+    { label: "Top League (45)", selected: false, fill: true },
+    { label: "European Games", selected: false },
+    { label: "South America", selected: false },
+  ];
+
   return (
     <div className="no-scrollbar content-stretch flex gap-[8px] items-center relative shrink-0 w-[380px] overflow-x-auto snap-x snap-mandatory" data-name="Container">
-      <div className="content-stretch flex gap-[4px] h-[34px] items-center justify-center max-w-[200px] px-[16px] py-[8px] relative rounded-[16px] shrink-0 w-fit snap-start" style={{ backgroundImage: "linear-gradient(179.412deg, rgba(255, 148, 87, 0.8) 1.596%, rgba(153, 56, 0, 0.8) 98.637%), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Tabs New - Sports">
-        <div aria-hidden className="absolute border border-[#e5eafa] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] min-w-px not-italic relative text-[#e5eafa] text-[14px] text-center whitespace-nowrap">
-          <p className="leading-[18px]">Top League (45)</p>
-        </div>
-      </div>
-      <div className="content-stretch flex gap-[4px] h-[34px] items-center justify-center max-w-[200px] px-[16px] py-[8px] relative rounded-[16px] shrink-0 w-fit snap-start" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 101 34' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(6.4343e-14 3.4086 -12.286 1.8923e-13 50.5 -7.776e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Tabs New - Sports">
-        <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] min-w-px not-italic relative text-[#acafbb] text-[14px] text-center whitespace-nowrap">
-          <p className="leading-[18px]">European Games</p>
-        </div>
-      </div>
-      <div className="content-stretch flex gap-[4px] h-[34px] items-center justify-center max-w-[200px] px-[16px] py-[8px] relative rounded-[16px] shrink-0 w-fit snap-start" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 101 34' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(6.4343e-14 3.4086 -12.286 1.8923e-13 50.5 -7.776e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Tabs New - Sports">
-        <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] min-w-px not-italic relative text-[#acafbb] text-[14px] text-center whitespace-nowrap">
-          <p className="leading-[18px]">South America</p>
-        </div>
-      </div>
-      <div className="content-stretch flex flex-1 gap-[4px] h-[34px] items-center justify-center max-w-[200px] min-w-[101px] px-[16px] py-[8px] relative rounded-[16px] snap-start" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 101 34' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(6.4343e-14 3.4086 -12.286 1.8923e-13 50.5 -7.776e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Tabs New - Sports">
-        <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] min-w-px not-italic relative text-[#acafbb] text-[14px] text-center whitespace-nowrap">
-          <p className="leading-[18px]">Top League (45)</p>
-        </div>
-      </div>
-      <div className="content-stretch flex gap-[4px] h-[34px] items-center justify-center max-w-[200px] px-[16px] py-[8px] relative rounded-[16px] shrink-0 w-fit snap-start" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 101 34' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(6.4343e-14 3.4086 -12.286 1.8923e-13 50.5 -7.776e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Tabs New - Sports">
-        <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] min-w-px not-italic relative text-[#acafbb] text-[14px] text-center whitespace-nowrap">
-          <p className="leading-[18px]">European Games</p>
-        </div>
-      </div>
-      <div className="content-stretch flex gap-[4px] h-[34px] items-center justify-center max-w-[200px] px-[16px] py-[8px] relative rounded-[16px] shrink-0 w-fit snap-start" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 101 34' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(6.4343e-14 3.4086 -12.286 1.8923e-13 50.5 -7.776e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Tabs New - Sports">
-        <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] min-w-px not-italic relative text-[#acafbb] text-[14px] text-center whitespace-nowrap">
-          <p className="leading-[18px]">South America</p>
-        </div>
-      </div>
+      {leagueTabs.map((tab, index) => (
+        <LeagueTab key={`${tab.label}-${index}`} label={tab.label} selected={tab.selected} fill={tab.fill} />
+      ))}
     </div>
   );
 }
