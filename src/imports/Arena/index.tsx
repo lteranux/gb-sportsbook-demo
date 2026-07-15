@@ -23,6 +23,7 @@ import { imgGroup } from "./svg-vzcwu";
 import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { OddsButton } from "@/app/components/betting/OddsButton";
+import { ResponsiveCanvas } from "@/app/components/layout/ResponsiveCanvas";
 
 type BottomMenuItemProps = {
   active?: boolean;
@@ -9381,8 +9382,10 @@ export default function Arena() {
 
   return (
     <div className="content-stretch flex flex-col items-center relative size-full" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 428 4150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.8999999761581421'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-22.45 96.416 -208.31 268.83 66 -19.862)'><stop stop-color='rgba(25,56,126,1)' offset='0'/><stop stop-color='rgba(20,41,86,0.5)' offset='0.42313'/><stop stop-color='rgba(14,25,45,0)' offset='0.84625'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(7, 13, 24) 0%, rgb(7, 13, 24) 100%)" }} data-name="Arena">
-      <Frame7 />
-      <Layout />
+      <ResponsiveCanvas designWidth={428}>
+        <Frame7 />
+        <Layout />
+      </ResponsiveCanvas>
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
