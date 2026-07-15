@@ -2946,7 +2946,6 @@ function SportTab({
       data-name="Tabs"
       aria-pressed={selected}
     >
-      {selected && <div aria-hidden className="absolute border border-[#e5eafa] border-solid inset-0 pointer-events-none rounded-[16px]" />}
       <SportTabIcon />
       <div
         className={
@@ -3020,7 +3019,6 @@ function LeagueTab({ label, selected, fill }: { label: string; selected: boolean
       style={{ backgroundImage: background }}
       data-name="Tabs New - Sports"
     >
-      {selected && <div aria-hidden className="absolute border border-[#e5eafa] border-solid inset-0 pointer-events-none rounded-[16px]" />}
       <div
         className={
           "[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] min-w-px not-italic relative text-[14px] text-center whitespace-nowrap " +
