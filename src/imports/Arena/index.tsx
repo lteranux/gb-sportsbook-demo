@@ -7996,10 +7996,16 @@ function Frame2() {
 
 function Carousel() {
   return (
-    <div className="content-stretch flex gap-[8px] items-center relative shrink-0 w-full" data-name="Carousel">
-      <Frame1 />
-      <Frame />
-      <Frame2 />
+    <div className="no-scrollbar content-stretch flex gap-[8px] items-center overflow-x-auto overflow-y-clip relative shrink-0 snap-x snap-mandatory w-full" data-name="Carousel">
+      <div className="shrink-0 snap-start">
+        <Frame1 />
+      </div>
+      <div className="shrink-0 snap-start">
+        <Frame />
+      </div>
+      <div className="shrink-0 snap-start">
+        <Frame2 />
+      </div>
     </div>
   );
 }
