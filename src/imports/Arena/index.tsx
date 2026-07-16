@@ -20,7 +20,7 @@ import imgImage60 from "./b80a103bc87ceb73f04fe33805150eb3193f423e.png";
 import imgImage61 from "./84c13f93648a5300f55ea4786dcfd8e7f0be9092.png";
 import imgBottomNavigationMobile from "./999dc029575f09683ae54053a49a9f69f397c899.png";
 import { imgGroup } from "./svg-vzcwu";
-import { useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { OddsButton } from "@/app/components/betting/OddsButton";
 import { ResponsiveCanvas } from "@/app/components/layout/ResponsiveCanvas";
@@ -31,6 +31,29 @@ type BottomMenuItemProps = {
 };
 
 type TopTab = "arena" | "live" | "prematch";
+
+// Lets deeply-nested duplicated card components (Time, Time1-4, EventInfoCounter5-12, etc.)
+// know which top-level tab is active without threading the prop through every layer.
+const TopTabContext = createContext<TopTab>("arena");
+
+function LiveTag({ withIcon = false }: { withIcon?: boolean }) {
+  const activeTopTab = useContext(TopTabContext);
+  if (activeTopTab === "prematch") return null;
+  return (
+    <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
+      {withIcon && (
+        <div className="overflow-clip relative shrink-0 size-[12px]" data-name="Live">
+          <div className="absolute inset-[12.47%_6.32%_12.44%_6.32%]" data-name="Icon">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.4827 9.01068">
+              <path d={svgPaths.p5df4580} fill="var(--fill-0, #070D18)" id="Icon" />
+            </svg>
+          </div>
+        </div>
+      )}
+      <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
+    </div>
+  );
+}
 
 function Menu() {
   return (
@@ -325,16 +348,7 @@ function Dots() {
 function Time() {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Time">
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <div className="overflow-clip relative shrink-0 size-[12px]" data-name="Live">
-          <div className="absolute inset-[12.47%_6.32%_12.44%_6.32%]" data-name="Icon">
-            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.4827 9.01068">
-              <path d={svgPaths.p5df4580} fill="var(--fill-0, #070D18)" id="Icon" />
-            </svg>
-          </div>
-        </div>
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag withIcon />
       <div className="bg-[#19387e] content-stretch flex gap-[2px] items-center justify-center min-w-[48px] px-[4px] py-[2px] relative rounded-[4px] shrink-0" data-name="Event Info Time Block">
         <div className="overflow-clip relative shrink-0 size-[14px]" data-name="Clock Circular">
           <div className="absolute inset-[8.33%]" data-name="Icon">
@@ -553,16 +567,7 @@ function Market() {
 function Time1() {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Time">
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <div className="overflow-clip relative shrink-0 size-[12px]" data-name="Live">
-          <div className="absolute inset-[12.47%_6.32%_12.44%_6.32%]" data-name="Icon">
-            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.4827 9.01068">
-              <path d={svgPaths.p5df4580} fill="var(--fill-0, #070D18)" id="Icon" />
-            </svg>
-          </div>
-        </div>
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag withIcon />
       <div className="bg-[#19387e] content-stretch flex gap-[2px] items-center justify-center min-w-[48px] px-[4px] py-[2px] relative rounded-[4px] shrink-0" data-name="Event Info Time Block">
         <div className="overflow-clip relative shrink-0 size-[14px]" data-name="Clock Circular">
           <div className="absolute inset-[8.33%]" data-name="Icon">
@@ -781,16 +786,7 @@ function Market1() {
 function Time2() {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Time">
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <div className="overflow-clip relative shrink-0 size-[12px]" data-name="Live">
-          <div className="absolute inset-[12.47%_6.32%_12.44%_6.32%]" data-name="Icon">
-            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.4827 9.01068">
-              <path d={svgPaths.p5df4580} fill="var(--fill-0, #070D18)" id="Icon" />
-            </svg>
-          </div>
-        </div>
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag withIcon />
       <div className="bg-[#19387e] content-stretch flex gap-[2px] items-center justify-center min-w-[48px] px-[4px] py-[2px] relative rounded-[4px] shrink-0" data-name="Event Info Time Block">
         <div className="overflow-clip relative shrink-0 size-[14px]" data-name="Clock Circular">
           <div className="absolute inset-[8.33%]" data-name="Icon">
@@ -1009,16 +1005,7 @@ function Market2() {
 function Time3() {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Time">
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <div className="overflow-clip relative shrink-0 size-[12px]" data-name="Live">
-          <div className="absolute inset-[12.47%_6.32%_12.44%_6.32%]" data-name="Icon">
-            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.4827 9.01068">
-              <path d={svgPaths.p5df4580} fill="var(--fill-0, #070D18)" id="Icon" />
-            </svg>
-          </div>
-        </div>
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag withIcon />
       <div className="bg-[#19387e] content-stretch flex gap-[2px] items-center justify-center min-w-[48px] px-[4px] py-[2px] relative rounded-[4px] shrink-0" data-name="Event Info Time Block">
         <div className="overflow-clip relative shrink-0 size-[14px]" data-name="Clock Circular">
           <div className="absolute inset-[8.33%]" data-name="Icon">
@@ -1237,16 +1224,7 @@ function Market3() {
 function Time4() {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Time">
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <div className="overflow-clip relative shrink-0 size-[12px]" data-name="Live">
-          <div className="absolute inset-[12.47%_6.32%_12.44%_6.32%]" data-name="Icon">
-            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.4827 9.01068">
-              <path d={svgPaths.p5df4580} fill="var(--fill-0, #070D18)" id="Icon" />
-            </svg>
-          </div>
-        </div>
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag withIcon />
       <div className="bg-[#19387e] content-stretch flex gap-[2px] items-center justify-center min-w-[48px] px-[4px] py-[2px] relative rounded-[4px] shrink-0" data-name="Event Info Time Block">
         <div className="overflow-clip relative shrink-0 size-[14px]" data-name="Clock Circular">
           <div className="absolute inset-[8.33%]" data-name="Icon">
@@ -3099,6 +3077,54 @@ function TimeFilter() {
   );
 }
 
+function DateFilterTab({ label, selected, onSelect }: { label: string; selected: boolean; onSelect: () => void }) {
+  const [hovered, setHovered] = useState(false);
+  const tint = selected ? "#e5eafa" : "#acafbb";
+  const showUnderline = selected || hovered;
+
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="content-stretch flex flex-col gap-[6px] items-center justify-end relative shrink-0 cursor-pointer"
+      data-name="Tabs New - Sports"
+    >
+      <div className="content-stretch flex gap-[4px] items-center px-[12px] relative shrink-0" data-name="Horizontal Container">
+        <div className="relative shrink-0 size-[16px]" data-name="Prematch Calendar">
+          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 12">
+            <path d={svgPaths.pf88d80} fill={`var(--fill-0, ${tint})`} id="Icon" />
+          </svg>
+        </div>
+        <div
+          className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-center transition-colors whitespace-nowrap"
+          style={{ color: tint }}
+        >
+          <p className="leading-[16px]">{label}</p>
+        </div>
+      </div>
+      <div
+        className={`bg-[#ff9457] h-[2px] relative rounded-tl-[100px] rounded-tr-[8px] shrink-0 transition-all duration-200 ${showUnderline ? "w-full" : "w-0"}`}
+        data-name="Line highlight"
+      />
+    </button>
+  );
+}
+
+function DateFilter() {
+  const [selected, setSelected] = useState(0);
+  const options = ["Today 15/06", "Tomorrow 16th", "17th July", "18th July", "18th July"];
+
+  return (
+    <div className="no-scrollbar content-stretch flex gap-[4px] items-center overflow-x-auto relative shrink-0 w-[380px]" data-name="Date Filter">
+      {options.map((label, index) => (
+        <DateFilterTab key={`${label}-${index}`} label={label} selected={selected === index} onSelect={() => setSelected(index)} />
+      ))}
+    </div>
+  );
+}
+
 function Group8() {
   return (
     <div className="grid-cols-[max-content] grid-rows-[max-content] h-full inline-grid leading-[0] place-items-start relative shrink-0">
@@ -3797,9 +3823,7 @@ function EventInfoCounter5() {
           </p>
         </div>
       </div>
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag />
     </div>
   );
 }
@@ -4088,9 +4112,7 @@ function EventInfoCounter6() {
           </p>
         </div>
       </div>
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag />
     </div>
   );
 }
@@ -4368,9 +4390,7 @@ function EventInfoCounter7() {
           </p>
         </div>
       </div>
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag />
     </div>
   );
 }
@@ -4648,9 +4668,7 @@ function EventInfoCounter8() {
           </p>
         </div>
       </div>
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag />
     </div>
   );
 }
@@ -6713,9 +6731,7 @@ function EventInfoCounter9() {
           </p>
         </div>
       </div>
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag />
     </div>
   );
 }
@@ -6977,9 +6993,7 @@ function EventInfoCounter10() {
           </p>
         </div>
       </div>
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag />
     </div>
   );
 }
@@ -7257,9 +7271,7 @@ function EventInfoCounter11() {
           </p>
         </div>
       </div>
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag />
     </div>
   );
 }
@@ -7537,9 +7549,7 @@ function EventInfoCounter12() {
           </p>
         </div>
       </div>
-      <div className="bg-[#5ce595] content-stretch flex gap-[2px] h-[18px] items-center justify-center px-[4px] relative rounded-[4px] shrink-0" data-name="Live Tag">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[14px] not-italic relative shrink-0 text-[#070d18] text-[10px] whitespace-nowrap">LIVE</p>
-      </div>
+      <LiveTag />
     </div>
   );
 }
@@ -7892,7 +7902,7 @@ function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
       <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Tab Navigation - Sports">
         <Container11 />
       </div>
-      <TimeFilter />
+      {activeTopTab === "prematch" ? <DateFilter /> : <TimeFilter />}
       <div className="content-stretch flex flex-col gap-[16px] items-start min-w-[312px] relative shrink-0 w-[380px]" data-name="Matches Feed">
         <Sort allExpanded={allExpanded} onToggleAll={toggleAll} />
         <EventCards expanded={expanded} toggle={toggle} />
@@ -9440,32 +9450,34 @@ export default function Arena() {
   const [activeTopTab, setActiveTopTab] = useState<TopTab>("arena");
 
   return (
-    <div className="content-stretch flex flex-col items-center relative size-full" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 428 4150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.8999999761581421'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-22.45 96.416 -208.31 268.83 66 -19.862)'><stop stop-color='rgba(25,56,126,1)' offset='0'/><stop stop-color='rgba(20,41,86,0.5)' offset='0.42313'/><stop stop-color='rgba(14,25,45,0)' offset='0.84625'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(7, 13, 24) 0%, rgb(7, 13, 24) 100%)" }} data-name="Arena">
-      <ResponsiveCanvas designWidth={428}>
-        <Frame7 />
-        <Layout activeTopTab={activeTopTab} onSelectTopTab={setActiveTopTab} />
-      </ResponsiveCanvas>
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.15 }}
-        className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[396px] max-w-[calc(100%-32px)] rounded-[100px]"
-        data-name="Bottom Navigation - Mobile"
-      >
-        <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[100px]">
-          <img alt="" className="absolute max-w-none object-cover rounded-[100px] size-full" src={imgBottomNavigationMobile} />
-          <div className="absolute backdrop-blur-[75px] inset-0 rounded-[100px]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 396 60' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.5227e-13 6.0153 -48.171 3.3394e-13 198 -1.3722e-12)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.7)' offset='1'/></radialGradient></defs></svg>\")" }} />
-        </div>
-        <div className="content-stretch flex items-start justify-between overflow-clip px-[20px] py-[8px] relative rounded-[inherit] size-full">
-          <BottomMenuItems active={activeTab === "casino"} onClick={() => setActiveTab("casino")} />
-          <BottomMenuItems1 active={activeTab === "sports"} onClick={() => setActiveTab("sports")} />
-          <BottomMenuItems2 active={activeTab === "slots"} onClick={() => setActiveTab("slots")} />
-          <BottomMenuItems3 active={activeTab === "rewards"} onClick={() => setActiveTab("rewards")} />
-          <BottomMenuItems4 active={activeTab === "search"} onClick={() => setActiveTab("search")} />
-          <Light1 />
-        </div>
-        <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[100px]" />
-      </motion.div>
-    </div>
+    <TopTabContext.Provider value={activeTopTab}>
+      <div className="content-stretch flex flex-col items-center relative size-full" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 428 4150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.8999999761581421'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-22.45 96.416 -208.31 268.83 66 -19.862)'><stop stop-color='rgba(25,56,126,1)' offset='0'/><stop stop-color='rgba(20,41,86,0.5)' offset='0.42313'/><stop stop-color='rgba(14,25,45,0)' offset='0.84625'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(7, 13, 24) 0%, rgb(7, 13, 24) 100%)" }} data-name="Arena">
+        <ResponsiveCanvas designWidth={428}>
+          <Frame7 />
+          <Layout activeTopTab={activeTopTab} onSelectTopTab={setActiveTopTab} />
+        </ResponsiveCanvas>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.15 }}
+          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[396px] max-w-[calc(100%-32px)] rounded-[100px]"
+          data-name="Bottom Navigation - Mobile"
+        >
+          <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[100px]">
+            <img alt="" className="absolute max-w-none object-cover rounded-[100px] size-full" src={imgBottomNavigationMobile} />
+            <div className="absolute backdrop-blur-[75px] inset-0 rounded-[100px]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 396 60' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.5227e-13 6.0153 -48.171 3.3394e-13 198 -1.3722e-12)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.7)' offset='1'/></radialGradient></defs></svg>\")" }} />
+          </div>
+          <div className="content-stretch flex items-start justify-between overflow-clip px-[20px] py-[8px] relative rounded-[inherit] size-full">
+            <BottomMenuItems active={activeTab === "casino"} onClick={() => setActiveTab("casino")} />
+            <BottomMenuItems1 active={activeTab === "sports"} onClick={() => setActiveTab("sports")} />
+            <BottomMenuItems2 active={activeTab === "slots"} onClick={() => setActiveTab("slots")} />
+            <BottomMenuItems3 active={activeTab === "rewards"} onClick={() => setActiveTab("rewards")} />
+            <BottomMenuItems4 active={activeTab === "search"} onClick={() => setActiveTab("search")} />
+            <Light1 />
+          </div>
+          <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[100px]" />
+        </motion.div>
+      </div>
+    </TopTabContext.Provider>
   );
 }
