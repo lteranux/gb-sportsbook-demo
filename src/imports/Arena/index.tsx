@@ -7900,7 +7900,8 @@ function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
       <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Tab Navigation - Sports">
         <Container11 />
       </div>
-      {activeTopTab === "prematch" ? <DateFilter /> : <TimeFilter />}
+      {activeTopTab === "prematch" && <DateFilter />}
+      {activeTopTab === "live" && <TimeFilter />}
       <div className="content-stretch flex flex-col gap-[16px] items-start min-w-[312px] relative shrink-0 w-[380px]" data-name="Matches Feed">
         <Sort allExpanded={allExpanded} onToggleAll={toggleAll} />
         <EventCards expanded={expanded} toggle={toggle} />
