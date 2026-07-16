@@ -28,13 +28,11 @@ const ODDS_SELECTED_BORDER = "#E5EAFA";
  * own marketId, so picks across different Event cards stay independent and
  * can all be selected at the same time.
  */
-export function OddsButton({ selection, layout = "vertical", trend = "none", disabled = false }: OddsButtonProps) {
+export function OddsButton({ selection, layout = "vertical", disabled = false }: OddsButtonProps) {
   const { isSelected, toggleSelection } = useBetSlip();
   const selected = isSelected(selection.id);
   const [hovered, setHovered] = useState(false);
-  const isEventLine = layout === "horizontal";
 
-  const trendColor = trend === "up" ? "#5CE595" : trend === "down" ? "#FF9457" : "transparent";
   const background = selected ? ODDS_SELECTED_BG : hovered ? ODDS_HOVER_BG : ODDS_DEFAULT_BG;
   const borderColor = selected ? ODDS_SELECTED_BORDER : "rgba(25,56,126,0)";
 
@@ -58,14 +56,6 @@ export function OddsButton({ selection, layout = "vertical", trend = "none", dis
       aria-pressed={selected}
       aria-label={`${selection.marketLabel}: ${selection.meaning} at ${selection.odds}`}
     >
-      {trend !== "none" &&
-        (isEventLine ? (
-          <svg className="absolute left-[4px] top-[4px]" width="8" height="8" viewBox="0 0 8 8" aria-hidden>
-            <polygon points={trend === "up" ? "4,0 8,8 0,8" : "0,0 8,0 4,8"} fill={trendColor} />
-          </svg>
-        ) : (
-          <span className="absolute left-0 top-0 h-full w-[2px]" style={{ backgroundColor: trendColor }} aria-hidden />
-        ))}
       {layout === "horizontal" ? (
         <div className="flex items-center justify-between p-[8px] size-full">
           <span className="text-[#e5eafa] text-[12px] font-medium">{selection.meaning}</span>
