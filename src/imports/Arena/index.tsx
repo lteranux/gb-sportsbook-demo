@@ -7831,7 +7831,7 @@ function EventCards({ expanded, toggle }: { expanded: boolean[]; toggle: (index:
   );
 }
 
-function GameCardPlayers() {
+function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
   const [expanded, setExpanded] = useState<boolean[]>([true, true, true, true]);
   const toggle = (index: number) => setExpanded((prev) => prev.map((v, i) => (i === index ? !v : v)));
   const allExpanded = expanded.every(Boolean);
@@ -7839,7 +7839,7 @@ function GameCardPlayers() {
 
   return (
     <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full" data-name="Game Card Players">
-      <LiveWinningsTitle1 />
+      {activeTopTab === "arena" && <LiveWinningsTitle1 />}
       <Sports />
       <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Tab Navigation - Sports">
         <Container11 />
@@ -9216,7 +9216,7 @@ function Body({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelect
           </button>
         </>
       )}
-      <GameCardPlayers />
+      <GameCardPlayers activeTopTab={activeTopTab} />
       <Parnetships />
       <FooterNewColoredIcons />
     </div>
