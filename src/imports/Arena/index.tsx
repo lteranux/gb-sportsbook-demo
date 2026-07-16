@@ -3051,6 +3051,54 @@ function Container11() {
   );
 }
 
+function TimeFilterTab({ label, selected, onSelect }: { label: string; selected: boolean; onSelect: () => void }) {
+  const [hovered, setHovered] = useState(false);
+  const tint = selected ? "#e5eafa" : "#acafbb";
+  const showUnderline = selected || hovered;
+
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="content-stretch flex flex-col gap-[6px] items-center justify-end relative shrink-0 cursor-pointer"
+      data-name="Tabs New - Sports"
+    >
+      <div className="content-stretch flex gap-[4px] items-center px-[12px] relative shrink-0" data-name="Horizontal Container">
+        <div className="relative shrink-0 size-[16px]" data-name="Clock Circular">
+          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 11.6667 11.6667">
+            <path d={svgPaths.p1aa68c00} fill={`var(--fill-0, ${tint})`} id="Icon" />
+          </svg>
+        </div>
+        <div
+          className="[word-break:break-word] flex flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-center transition-colors whitespace-nowrap"
+          style={{ color: tint }}
+        >
+          <p className="leading-[16px]">{label}</p>
+        </div>
+      </div>
+      <div
+        className={`bg-[#ff9457] h-[2px] relative rounded-tl-[100px] rounded-tr-[8px] shrink-0 transition-all duration-200 ${showUnderline ? "w-full" : "w-0"}`}
+        data-name="Line highlight"
+      />
+    </button>
+  );
+}
+
+function TimeFilter() {
+  const [selected, setSelected] = useState(0);
+  const options = ["1hr", "3hrs", "6hrs", "12hrs", "16hr"];
+
+  return (
+    <div className="no-scrollbar content-stretch flex gap-[4px] items-center overflow-x-auto relative shrink-0 w-[380px]" data-name="Time Filter">
+      {options.map((label, index) => (
+        <TimeFilterTab key={label} label={label} selected={selected === index} onSelect={() => setSelected(index)} />
+      ))}
+    </div>
+  );
+}
+
 function Group8() {
   return (
     <div className="grid-cols-[max-content] grid-rows-[max-content] h-full inline-grid leading-[0] place-items-start relative shrink-0">
@@ -7844,6 +7892,7 @@ function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
       <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Tab Navigation - Sports">
         <Container11 />
       </div>
+      <TimeFilter />
       <div className="content-stretch flex flex-col gap-[16px] items-start min-w-[312px] relative shrink-0 w-[380px]" data-name="Matches Feed">
         <Sort allExpanded={allExpanded} onToggleAll={toggleAll} />
         <EventCards expanded={expanded} toggle={toggle} />
