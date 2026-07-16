@@ -2827,7 +2827,6 @@ function MenuAccordionOptionItem() {
   return (
     <div className="flex flex-row items-center self-stretch">
       <div className="h-full relative rounded-[16px] shrink-0 w-[60px]" style={{ backgroundImage: "linear-gradient(177.963deg, rgba(25, 100, 250, 0.2) 1.596%, rgba(8, 54, 148, 0.2) 98.637%), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }} data-name="Menu Accordion Option Item">
-        <div aria-hidden className="absolute border border-[#e5eafa] border-solid inset-0 pointer-events-none rounded-[16px]" />
         <div className="flex flex-col items-center size-full">
           <div className="content-stretch flex flex-col gap-[4px] items-center px-[4px] py-[8px] relative size-full">
             <Frame8 />
@@ -3114,7 +3113,7 @@ function DateFilterTab({ label, selected, onSelect }: { label: string; selected:
 
 function DateFilter() {
   const [selected, setSelected] = useState(0);
-  const options = ["Today 15/06", "Tomorrow 16th", "17th July", "18th July", "18th July"];
+  const options = ["Today 15/06", "Tomorrow 16th", "17th July", "18th July", "19th July"];
 
   return (
     <div className="no-scrollbar content-stretch flex gap-[4px] items-center overflow-x-auto relative shrink-0 w-[380px]" data-name="Date Filter">
@@ -3198,7 +3197,6 @@ function Sort({ allExpanded, onToggleAll }: { allExpanded: boolean; onToggleAll:
       <div className="content-stretch flex h-[32px] items-center justify-center p-[2px] relative rounded-[100px] shrink-0" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 108 32' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(6.8802e-14 3.2081 -13.137 1.781e-13 54 -7.3186e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(23, 39, 75) 0%, rgb(23, 39, 75) 100%)" }} data-name="Switcher secondary">
         <div aria-hidden className="absolute border border-[#17274b] border-solid inset-0 pointer-events-none rounded-[100px]" />
         <div className="h-full max-w-[200px] relative rounded-[16px] shrink-0 w-[60px]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 60 28' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(3.8223e-14 2.8071 -7.2986 1.5584e-13 30 -6.4038e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(25, 56, 126) 0%, rgb(25, 56, 126) 100%)" }} data-name="Tabs New - General">
-          <div aria-hidden className="absolute border border-[#e5eafa] border-solid inset-0 pointer-events-none rounded-[16px]" />
           <div className="flex flex-row items-center justify-end max-w-[inherit] size-full">
             <div className="content-stretch flex gap-[4px] items-center justify-end max-w-[inherit] p-[8px] relative size-full">
               <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] font-bold justify-center leading-[0] min-w-px not-italic relative text-[#e5eafa] text-[12px]">
