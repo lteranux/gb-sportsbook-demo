@@ -10,13 +10,12 @@ type OddsButtonProps = {
 };
 
 // "Event Lines" (horizontal 1/X/2 buttons inside the top Events carousel cards) follow the
-// Figma "Market Selection / Secondary" spec: dark navy default, warm-orange hover wash, gold
-// selected wash, with a small trend arrow in the top-left corner instead of an edge bar.
-const EVENT_LINE_DEFAULT_BG = "linear-gradient(90deg, rgb(7, 13, 24) 0%, rgb(7, 13, 24) 100%)";
-const EVENT_LINE_HOVER_BG =
-  "linear-gradient(179.412deg, rgba(255, 148, 87, 0.15) 1.596%, rgba(153, 56, 0, 0.15) 98.637%), linear-gradient(90deg, rgb(7, 13, 24) 0%, rgb(7, 13, 24) 100%)";
-const EVENT_LINE_SELECTED_BG =
-  "linear-gradient(179.412deg, rgba(242, 211, 61, 0.25) 1.596%, rgba(242, 211, 61, 0.1) 98.637%), linear-gradient(90deg, rgb(7, 13, 24) 0%, rgb(7, 13, 24) 100%)";
+// exact Figma spec: surface/primary-dark default, surface/secondary-dark hover,
+// surface/highlight-quaternary + white border when selected.
+const EVENT_LINE_DEFAULT_BG = "#070D18"; // surface/primary-dark
+const EVENT_LINE_HOVER_BG = "#0E192D"; // surface/secondary-dark
+const EVENT_LINE_SELECTED_BG = "#2E4E96"; // surface/highlight-quaternary
+const EVENT_LINE_SELECTED_BORDER = "#E5EAFA";
 
 /**
  * Shared, interactive odds-selection button.
@@ -50,11 +49,10 @@ export function OddsButton({ selection, layout = "vertical", trend = "none", dis
       whileHover={disabled ? undefined : { scale: 1.03 }}
       animate={
         isEventLine
-          ? { borderColor: selected ? "#F2D33D" : "rgba(25,56,126,0)" }
+          ? { backgroundColor: eventLineBg, borderColor: selected ? EVENT_LINE_SELECTED_BORDER : "rgba(25,56,126,0)" }
           : { backgroundColor: selected ? "#2a1a06" : "#070d18", borderColor: selected ? "#F2D33D" : "rgba(25,56,126,0)" }
       }
       transition={{ type: "spring", stiffness: 500, damping: 30 }}
-      style={isEventLine ? { backgroundImage: eventLineBg, transition: "background-image 200ms ease" } : undefined}
       className={
         "relative rounded-[8px] border flex-[1_0_0] min-w-px overflow-hidden disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer " +
         (layout === "horizontal" ? "h-[34px]" : "h-[50px] min-w-[32px]")
@@ -81,7 +79,7 @@ export function OddsButton({ selection, layout = "vertical", trend = "none", dis
               exit={{ opacity: 0, y: 6 }}
               transition={{ duration: 0.18 }}
               className="text-[14px] font-bold"
-              style={{ color: selected ? "#F2D33D" : "#e5eafa" }}
+              style={{ color: "#e5eafa" }}
             >
               {selection.odds}
             </motion.span>
