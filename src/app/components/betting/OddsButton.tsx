@@ -9,13 +9,14 @@ type OddsButtonProps = {
   disabled?: boolean;
 };
 
-// "Event Lines" (horizontal 1/X/2 buttons inside the top Events carousel cards) follow the
-// exact Figma spec: surface/primary-dark default, surface/secondary-dark hover,
-// surface/highlight-quaternary + white border when selected.
-const EVENT_LINE_DEFAULT_BG = "#070D18"; // surface/primary-dark
-const EVENT_LINE_HOVER_BG = "#0E192D"; // surface/secondary-dark
-const EVENT_LINE_SELECTED_BG = "#2E4E96"; // surface/highlight-quaternary
-const EVENT_LINE_SELECTED_BORDER = "#E5EAFA";
+// All odds-selection buttons (Event Lines in the top Events carousel, plus the vertical
+// totals/handicap Lines inside the league match accordions) share the same Figma spec:
+// surface/primary-dark default, surface/secondary-dark hover, surface/highlight-quaternary
+// + white border when selected.
+const ODDS_DEFAULT_BG = "#070D18"; // surface/primary-dark
+const ODDS_HOVER_BG = "#0E192D"; // surface/secondary-dark
+const ODDS_SELECTED_BG = "#2E4E96"; // surface/highlight-quaternary
+const ODDS_SELECTED_BORDER = "#E5EAFA";
 
 /**
  * Shared, interactive odds-selection button.
@@ -34,7 +35,8 @@ export function OddsButton({ selection, layout = "vertical", trend = "none", dis
   const isEventLine = layout === "horizontal";
 
   const trendColor = trend === "up" ? "#5CE595" : trend === "down" ? "#FF9457" : "transparent";
-  const eventLineBg = selected ? EVENT_LINE_SELECTED_BG : hovered ? EVENT_LINE_HOVER_BG : EVENT_LINE_DEFAULT_BG;
+  const background = selected ? ODDS_SELECTED_BG : hovered ? ODDS_HOVER_BG : ODDS_DEFAULT_BG;
+  const borderColor = selected ? ODDS_SELECTED_BORDER : "rgba(25,56,126,0)";
 
   return (
     <motion.button
@@ -47,11 +49,7 @@ export function OddsButton({ selection, layout = "vertical", trend = "none", dis
       data-selected={selected}
       whileTap={disabled ? undefined : { scale: 0.92 }}
       whileHover={disabled ? undefined : { scale: 1.03 }}
-      animate={
-        isEventLine
-          ? { backgroundColor: eventLineBg, borderColor: selected ? EVENT_LINE_SELECTED_BORDER : "rgba(25,56,126,0)" }
-          : { backgroundColor: selected ? "#2a1a06" : "#070d18", borderColor: selected ? "#F2D33D" : "rgba(25,56,126,0)" }
-      }
+      animate={{ backgroundColor: background, borderColor }}
       transition={{ type: "spring", stiffness: 500, damping: 30 }}
       className={
         "relative rounded-[8px] border flex-[1_0_0] min-w-px overflow-hidden disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer " +
@@ -96,7 +94,7 @@ export function OddsButton({ selection, layout = "vertical", trend = "none", dis
               exit={{ opacity: 0, y: 6 }}
               transition={{ duration: 0.18 }}
               className="text-[14px] font-bold"
-              style={{ color: selected ? "#F2D33D" : "#e5eafa" }}
+              style={{ color: "#e5eafa" }}
             >
               {selection.odds}
             </motion.span>
