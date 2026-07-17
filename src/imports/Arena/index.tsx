@@ -22,6 +22,7 @@ import imgBottomNavigationMobile from "./999dc029575f09683ae54053a49a9f69f397c89
 import { imgGroup } from "./svg-vzcwu";
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { motion } from "motion/react";
+import { Link } from "react-router";
 import { OddsButton } from "@/app/components/betting/OddsButton";
 import { ResponsiveCanvas } from "@/app/components/layout/ResponsiveCanvas";
 
@@ -1448,32 +1449,42 @@ function Events() {
     >
       <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
         <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <EventInfoCounter />
-        <MatchInfo />
+        <Link to="/match/1" className="contents">
+          <EventInfoCounter />
+          <MatchInfo />
+        </Link>
         <Market />
       </div>
       <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
         <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <EventInfoCounter1 />
-        <MatchInfo1 />
+        <Link to="/match/2" className="contents">
+          <EventInfoCounter1 />
+          <MatchInfo1 />
+        </Link>
         <Market1 />
       </div>
       <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
         <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <EventInfoCounter2 />
-        <MatchInfo2 />
+        <Link to="/match/3" className="contents">
+          <EventInfoCounter2 />
+          <MatchInfo2 />
+        </Link>
         <Market2 />
       </div>
       <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
         <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <EventInfoCounter3 />
-        <MatchInfo3 />
+        <Link to="/match/4" className="contents">
+          <EventInfoCounter3 />
+          <MatchInfo3 />
+        </Link>
         <Market3 />
       </div>
       <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
         <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <EventInfoCounter4 />
-        <MatchInfo4 />
+        <Link to="/match/5" className="contents">
+          <EventInfoCounter4 />
+          <MatchInfo4 />
+        </Link>
         <Market4 />
       </div>
     </div>
@@ -3883,7 +3894,7 @@ function EventInfo1() {
 
 function SelectionLineGrid1() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
+    <Link to="/match/1" className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter5 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo />
@@ -3918,7 +3929,7 @@ function SelectionLineGrid1() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -4172,7 +4183,7 @@ function EventInfo3() {
 
 function SelectionLineGrid2() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
+    <Link to="/match/2" className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter6 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo2 />
@@ -4207,7 +4218,7 @@ function SelectionLineGrid2() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -4450,7 +4461,7 @@ function EventInfo5() {
 
 function SelectionLineGrid3() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
+    <Link to="/match/3" className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter7 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo4 />
@@ -4485,7 +4496,7 @@ function SelectionLineGrid3() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -4728,7 +4739,7 @@ function EventInfo7() {
 
 function SelectionLineGrid4() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
+    <Link to="/match/4" className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter8 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo6 />
@@ -4763,7 +4774,7 @@ function SelectionLineGrid4() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -6791,7 +6802,7 @@ function EventInfo9() {
 
 function SelectionLineGrid6() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
+    <Link to="/match/5" className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter9 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo8 />
@@ -6826,7 +6837,7 @@ function SelectionLineGrid6() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -7053,7 +7064,7 @@ function EventInfo11() {
 
 function SelectionLineGrid7() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
+    <Link to="/match/1" className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter10 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo10 />
@@ -7088,7 +7099,7 @@ function SelectionLineGrid7() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -7331,7 +7342,7 @@ function EventInfo13() {
 
 function SelectionLineGrid8() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
+    <Link to="/match/2" className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter11 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo12 />
@@ -7366,7 +7377,7 @@ function SelectionLineGrid8() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -7609,7 +7620,7 @@ function EventInfo15() {
 
 function SelectionLineGrid9() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
+    <Link to="/match/3" className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-[40%]" data-name="Selection Line Grid">
       <EventInfoCounter12 />
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Event Info Wrapper">
         <EventInfo14 />
@@ -7644,7 +7655,7 @@ function SelectionLineGrid9() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
