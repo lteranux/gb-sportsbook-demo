@@ -1448,22 +1448,19 @@ function Market4() {
 }
 
 function Events() {
-  const isMatchPage = useContext(MatchPageContext);
   return (
     <div
       className="no-scrollbar flex gap-[12px] items-start relative shrink-0 w-[380px] overflow-x-auto overflow-y-hidden snap-x snap-mandatory"
       data-name="Events"
     >
-      {!isMatchPage && (
-        <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
-          <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
-          <Link to="/match" className="contents">
-            <EventInfoCounter />
-            <MatchInfo />
-          </Link>
-          <Market />
-        </div>
-      )}
+      <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
+        <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
+        <Link to="/match" className="contents">
+          <EventInfoCounter />
+          <MatchInfo />
+        </Link>
+        <Market />
+      </div>
       <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
         <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
         <Link to="/match" className="contents">
@@ -1518,7 +1515,7 @@ function Content({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSel
           <Dots />
         </>
       )}
-      <Events />
+      {!isMatchPage && <Events />}
       <div className="absolute bg-gradient-to-l from-[#070d18] h-[186px] left-[385px] to-[rgba(7,13,24,0)] top-[288px] w-[19px]" data-name="shadow" />
     </div>
   );
@@ -7913,6 +7910,7 @@ function EventCards({ expanded, toggle }: { expanded: boolean[]; toggle: (index:
 }
 
 function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
+  const isMatchPage = useContext(MatchPageContext);
   const [expanded, setExpanded] = useState<boolean[]>([true, true, true, true]);
   const toggle = (index: number) => setExpanded((prev) => prev.map((v, i) => (i === index ? !v : v)));
   const allExpanded = expanded.every(Boolean);
@@ -7925,8 +7923,8 @@ function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
       <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Tab Navigation - Sports">
         <Container11 />
       </div>
-      {activeTopTab === "prematch" && <DateFilter />}
-      {activeTopTab === "live" && <TimeFilter />}
+      {activeTopTab === "prematch" && !isMatchPage && <DateFilter />}
+      {activeTopTab === "live" && !isMatchPage && <TimeFilter />}
       <div className="content-stretch flex flex-col gap-[16px] items-start min-w-[312px] relative shrink-0 w-[380px]" data-name="Matches Feed">
         <Sort allExpanded={allExpanded} onToggleAll={toggleAll} />
         <EventCards expanded={expanded} toggle={toggle} />
