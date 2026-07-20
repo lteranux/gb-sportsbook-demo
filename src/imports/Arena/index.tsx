@@ -37,6 +37,12 @@ type TopTab = "arena" | "live" | "prematch";
 // know which top-level tab is active without threading the prop through every layer.
 const TopTabContext = createContext<TopTab>("arena");
 
+// True when Arena is rendered as the standalone Match Page (a drill-down duplicate of
+// Live) rather than the main Arena/Live/Prematch screen itself. A few chrome elements
+// that only make sense on the main screen (the top tab switcher, sport-filter row, and
+// the Event card you just came from) are hidden in that context.
+const MatchPageContext = createContext<boolean>(false);
+
 function LiveTag({ withIcon = false }: { withIcon?: boolean }) {
   const activeTopTab = useContext(TopTabContext);
   if (activeTopTab === "prematch") return null;
@@ -1442,19 +1448,22 @@ function Market4() {
 }
 
 function Events() {
+  const isMatchPage = useContext(MatchPageContext);
   return (
     <div
       className="no-scrollbar flex gap-[12px] items-start relative shrink-0 w-[380px] overflow-x-auto overflow-y-hidden snap-x snap-mandatory"
       data-name="Events"
     >
-      <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
-        <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
-        <Link to="/match" className="contents">
-          <EventInfoCounter />
-          <MatchInfo />
-        </Link>
-        <Market />
-      </div>
+      {!isMatchPage && (
+        <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
+          <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
+          <Link to="/match" className="contents">
+            <EventInfoCounter />
+            <MatchInfo />
+          </Link>
+          <Market />
+        </div>
+      )}
       <div className="bg-gradient-to-b content-stretch flex flex-col from-[#17274b] gap-[8px] items-center min-h-[188px] min-w-[300px] px-[16px] py-[12px] relative rounded-[16px] shrink-0 to-[#19387e] w-[300px] snap-start" data-name="Event card">
         <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[16px]" />
         <Link to="/match" className="contents">
@@ -1492,14 +1501,17 @@ function Events() {
 }
 
 function Content({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelectTopTab: (tab: TopTab) => void }) {
+  const isMatchPage = useContext(MatchPageContext);
   return (
     <div className="content-stretch flex flex-col gap-[20px] items-center relative shrink-0 w-full" data-name="Content">
-      <div className="relative shrink-0 w-[428px]" data-name="Tab Navigation - Sports">
-        <div className="content-stretch flex flex-col items-start overflow-x-auto overflow-y-clip px-[16px] relative rounded-[inherit] size-full">
-          <Container activeTopTab={activeTopTab} onSelectTopTab={onSelectTopTab} />
+      {!isMatchPage && (
+        <div className="relative shrink-0 w-[428px]" data-name="Tab Navigation - Sports">
+          <div className="content-stretch flex flex-col items-start overflow-x-auto overflow-y-clip px-[16px] relative rounded-[inherit] size-full">
+            <Container activeTopTab={activeTopTab} onSelectTopTab={onSelectTopTab} />
+          </div>
+          <div aria-hidden className="absolute border-[#19387e] border-b border-solid inset-0 pointer-events-none" />
         </div>
-        <div aria-hidden className="absolute border-[#19387e] border-b border-solid inset-0 pointer-events-none" />
-      </div>
+      )}
       {activeTopTab === "arena" && (
         <>
           <BannerCarousel />
@@ -2978,6 +2990,8 @@ function SportFilter() {
 }
 
 function Sports() {
+  const isMatchPage = useContext(MatchPageContext);
+  if (isMatchPage) return null;
   return (
     <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-[380px]" data-name="Sports">
       <MenuAccordionOptionItem />
@@ -9455,12 +9469,16 @@ function Light1() {
 
 type ArenaTab = "casino" | "sports" | "slots" | "rewards" | "search";
 
-export default function Arena({ initialTopTab = "arena" }: { initialTopTab?: TopTab } = {}) {
+export default function Arena({
+  initialTopTab = "arena",
+  isMatchPage = false,
+}: { initialTopTab?: TopTab; isMatchPage?: boolean } = {}) {
   const [activeTab, setActiveTab] = useState<ArenaTab>("sports");
   const [activeTopTab, setActiveTopTab] = useState<TopTab>(initialTopTab);
 
   return (
     <TopTabContext.Provider value={activeTopTab}>
+    <MatchPageContext.Provider value={isMatchPage}>
       <div className="content-stretch flex flex-col items-center relative size-full" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 428 4150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.8999999761581421'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-22.45 96.416 -208.31 268.83 66 -19.862)'><stop stop-color='rgba(25,56,126,1)' offset='0'/><stop stop-color='rgba(20,41,86,0.5)' offset='0.42313'/><stop stop-color='rgba(14,25,45,0)' offset='0.84625'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(7, 13, 24) 0%, rgb(7, 13, 24) 100%)" }} data-name="Arena">
         <ResponsiveCanvas designWidth={428}>
           <Frame7 />
@@ -9488,6 +9506,7 @@ export default function Arena({ initialTopTab = "arena" }: { initialTopTab?: Top
           <div aria-hidden className="absolute border border-[#19387e] border-solid inset-0 pointer-events-none rounded-[100px]" />
         </motion.div>
       </div>
+    </MatchPageContext.Provider>
     </TopTabContext.Provider>
   );
 }

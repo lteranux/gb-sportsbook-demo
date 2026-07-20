@@ -7,5 +7,5 @@ import Arena from "@/imports/Arena/index";
  * seeds the top tab switcher to "live" on load instead of "arena".
  */
 export default function MatchPage() {
-  return <Arena initialTopTab="live" />;
+  return <Arena initialTopTab="live" isMatchPage />;
 }
