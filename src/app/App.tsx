@@ -5,7 +5,6 @@ import { BetSlipBar } from "@/app/components/betting/BetSlipBar";
 
 const Arena = lazy(() => import("@/imports/Arena/index"));
 const StagingPlayground = lazy(() => import("@/app/pages/StagingPlayground"));
-const MatchPage = lazy(() => import("@/app/pages/MatchPage"));
 
 function Shell({ children }: { children: ReactNode }) {
   return (
@@ -41,15 +40,6 @@ export default function App() {
                   <StagingPlayground />
                 </Suspense>
               </div>
-            }
-          />
-          <Route
-            path="/match/:matchId"
-            element={
-              <Suspense fallback={<div className="min-h-screen w-full" style={{ backgroundColor: "#070d18" }} />}>
-                <MatchPage />
-                <BetSlipBar />
-              </Suspense>
             }
           />
         </Routes>
