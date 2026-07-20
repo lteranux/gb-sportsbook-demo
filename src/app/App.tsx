@@ -5,6 +5,7 @@ import { BetSlipBar } from "@/app/components/betting/BetSlipBar";
 
 const Arena = lazy(() => import("@/imports/Arena/index"));
 const StagingPlayground = lazy(() => import("@/app/pages/StagingPlayground"));
+const MatchPage = lazy(() => import("@/app/pages/MatchPage"));
 
 function Shell({ children }: { children: ReactNode }) {
   return (
@@ -28,6 +29,15 @@ export default function App() {
             element={
               <Shell>
                 <Arena />
+                <BetSlipBar />
+              </Shell>
+            }
+          />
+          <Route
+            path="/match"
+            element={
+              <Shell>
+                <MatchPage />
                 <BetSlipBar />
               </Shell>
             }
