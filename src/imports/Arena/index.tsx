@@ -1594,7 +1594,7 @@ function AllMatchesPill() {
   return (
     <div className="flex flex-row items-center self-stretch" data-name="All Pill Wrapper">
       <div
-        className="border border-[#e5eafa] border-solid content-stretch flex flex-col gap-[4px] h-full items-center pb-[8px] pt-[8px] px-[4px] relative rounded-[16px] shrink-0 w-[60px]"
+        className="content-stretch flex flex-col gap-[4px] h-full items-center pb-[8px] pt-[8px] px-[4px] relative rounded-[16px] shrink-0 w-[60px]"
         style={{ backgroundImage: "linear-gradient(177.96deg, rgba(25, 100, 250, 0.2) 1.6%, rgba(8, 54, 148, 0.2) 98.6%), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }}
         data-name="Menu Accordion Option Item"
       >
