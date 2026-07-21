@@ -8229,7 +8229,7 @@ function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
       {activeTopTab === "prematch" && !isMatchPage && <DateFilter />}
       {activeTopTab === "live" && !isMatchPage && <TimeFilter />}
       <div className="content-stretch flex flex-col gap-[16px] items-start min-w-[312px] relative shrink-0 w-[380px]" data-name="Matches Feed">
-        <Sort allExpanded={allExpanded} onToggleAll={toggleAll} />
+        {!isMatchPage && <Sort allExpanded={allExpanded} onToggleAll={toggleAll} />}
         <EventCards expanded={expanded} toggle={toggle} />
       </div>
       <div className="absolute bg-gradient-to-l from-[#070d18] h-[62px] left-[385px] to-[rgba(7,13,24,0)] top-[82px] w-[19px]" data-name="shadow" />
