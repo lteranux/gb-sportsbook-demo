@@ -8211,6 +8211,175 @@ function MatchPageSort({ allExpanded, onToggleAll }: { allExpanded: boolean; onT
   );
 }
 
+// Market Event Cards (Figma node 26:35376) — replaces the league/event
+// accordion list with per-market accordions for the match being viewed, shown
+// only on Match Page. Reuses the shared OddsButton (so picks work with the
+// bet slip) and the shared ExpandableArrow / AccordionBody expand-collapse
+// pattern already used by the main league accordions.
+function MarketEventIcons() {
+  return (
+    <div className="content-stretch flex gap-[2px] items-start relative shrink-0" data-name="Event Info Icons">
+      <div className="drop-shadow-[0px_4px_2px_rgba(0,0,0,0.25)] relative shrink-0 size-[16px]" data-name="Early Payouts">
+        <div className="absolute inset-[11.11%]" data-name="icon">
+          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12.4447 12.4446">
+            <path clipRule="evenodd" d={svgPaths.p2e322880} fill="var(--fill-0, #E5EAFA)" fillRule="evenodd" id="icon" />
+          </svg>
+        </div>
+      </div>
+      <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Bonus Icon">
+        <div className="absolute h-[12.445px] left-[1.58px] top-[1.58px] w-[12.444px]" data-name="Icon">
+          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12.4443 12.4453">
+            <path d={svgPaths.p2bfdee80} fill="var(--fill-0, #E5EAFA)" id="Icon" />
+          </svg>
+        </div>
+      </div>
+      <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Bet Builder Icon">
+        <div className="absolute left-[1.78px] size-[12.444px] top-[1.78px]" data-name="Icon">
+          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12.4444 12.4444">
+            <g id="Icon">
+              <path d={svgPaths.pcbe0a00} fill="var(--fill-0, #E5EAFA)" />
+              <path d={svgPaths.p9bf6f80} fill="var(--fill-0, #E5EAFA)" />
+              <path d={svgPaths.p2c099880} fill="var(--fill-0, #E5EAFA)" />
+              <path d={svgPaths.p16806f00} fill="var(--fill-0, #E5EAFA)" />
+              <path clipRule="evenodd" d={svgPaths.p3226a180} fill="var(--fill-0, #E5EAFA)" fillRule="evenodd" />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MarketFavoriteButton() {
+  return (
+    <button type="button" className="cursor-pointer relative shrink-0 size-[20px]" aria-label="Add market to favorites" data-name="_Like sport">
+      <div className="absolute inset-0 overflow-clip" data-name="Favorites Stroke">
+        <div className="absolute inset-[13.54%_8.33%]" data-name="Icon">
+          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16.6667 14.5832">
+            <path d={svgPaths.p31fcbd80} fill="var(--fill-0, #E5EAFA)" id="Icon" />
+          </svg>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+function MarketAccordionHeader({ title, expanded, onToggle }: { title: string; expanded: boolean; onToggle: () => void }) {
+  return (
+    <div className="relative rounded-tl-[8px] rounded-tr-[8px] shrink-0 w-full" data-name="League Item Heading Expandable">
+      <div className="flex flex-row items-center justify-center size-full">
+        <div className="content-stretch flex items-center justify-between px-[12px] py-[8px] relative size-full">
+          <div className="content-stretch flex gap-[4px] items-center relative shrink-0" data-name="League Item Heading">
+            <MarketFavoriteButton />
+            <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="League Heading">
+              <p className="font-['Inter:Medium',sans-serif] font-medium leading-[18px] relative shrink-0 text-[#e5eafa] text-[14px] text-left whitespace-nowrap">{title}</p>
+            </div>
+            <Info />
+            <MarketEventIcons />
+          </div>
+          <ExpandableArrow expanded={expanded} onClick={onToggle} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MarketAccordionCard({
+  title,
+  expanded,
+  onToggle,
+  children,
+}: {
+  title: string;
+  expanded: boolean;
+  onToggle: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <div className="bg-[#0e192d] border border-[#17274b] border-solid content-stretch flex flex-col items-start relative rounded-[16px] shrink-0 w-full" data-name="Market Event Card">
+      <MarketAccordionHeader title={title} expanded={expanded} onToggle={onToggle} />
+      <AccordionBody expanded={expanded}>
+        <div className="content-stretch flex flex-col gap-[4px] items-start max-w-[380px] pb-[12px] pt-[4px] px-[12px] relative rounded-bl-[8px] rounded-br-[8px] shrink-0 w-full" data-name="Selection Line Grid">
+          {children}
+        </div>
+      </AccordionBody>
+    </div>
+  );
+}
+
+function Market1X2Rows({ marketId, home, away }: { marketId: string; home: string; away: string }) {
+  const marketLabel = "Live Betting 1x2";
+  return (
+    <div className="bg-[#17274b] content-stretch flex gap-[12px] items-start min-w-[286px] p-[8px] relative rounded-[16px] shrink-0 w-full" data-name="Market Match Card">
+      <div className="content-stretch flex flex-1 gap-[4px] items-start min-w-px relative" data-name="Lines">
+        <OddsButton layout="horizontal" selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: home, odds: "1.30" }} />
+        <OddsButton layout="horizontal" selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "1.30" }} />
+        <OddsButton layout="horizontal" selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: away, odds: "1.30" }} />
+      </div>
+    </div>
+  );
+}
+
+function TotalsSlider({ line }: { line: string }) {
+  return (
+    <div className="h-[36px] relative shrink-0 w-full" data-name="Slider">
+      <div className="absolute bg-[#0b1322] h-[6px] left-[14px] right-[14px] rounded-[8px] top-[18px]" data-name="Track">
+        <div
+          className="absolute h-[6px] left-0 rounded-[8px] top-0 w-[78px]"
+          style={{ backgroundImage: "linear-gradient(180deg, #ff9457 0%, #e05200 100%)" }}
+          data-name="Filled"
+        />
+      </div>
+      <div className="absolute content-stretch flex items-center justify-between left-[8px] right-[8px] top-[13px]" data-name="Steps">
+        <div className="bg-[#0b1322] border border-[#17274b] border-solid rounded-full size-[14px]" data-name="Dot" />
+        <div className="relative size-[16px]" data-name="Dot">
+          <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[#ff9457] left-1/2 rounded-full size-[14px] top-1/2" />
+          <p className="-translate-x-1/2 absolute font-['Inter:Bold',sans-serif] font-bold leading-[18px] left-1/2 text-[#e5eafa] text-[14px] text-center top-[-20px] whitespace-nowrap">
+            {line}
+          </p>
+        </div>
+        <div className="bg-[#0b1322] border border-[#17274b] border-solid rounded-full size-[14px]" data-name="Dot" />
+        <div className="bg-[#0b1322] border border-[#17274b] border-solid rounded-full size-[14px]" data-name="Dot" />
+      </div>
+    </div>
+  );
+}
+
+function OverUnderRows({ marketId, line }: { marketId: string; line: string }) {
+  const marketLabel = "Total Goals O/U";
+  return (
+    <div className="bg-[#17274b] content-stretch flex flex-col gap-[8px] items-start min-w-[286px] p-[8px] relative rounded-[16px] shrink-0 w-full" data-name="Market Match Card">
+      <div className="content-stretch flex gap-[4px] items-start relative shrink-0 w-full" data-name="Lines">
+        <OddsButton layout="horizontal" selection={{ id: `${marketId}-over`, marketId, marketLabel, meaning: `Over ${line}`, odds: "1.30" }} />
+        <OddsButton layout="horizontal" selection={{ id: `${marketId}-under`, marketId, marketLabel, meaning: `Under ${line}`, odds: "1.30" }} />
+      </div>
+      <TotalsSlider line={line} />
+    </div>
+  );
+}
+
+function MarketEventCards() {
+  const [expanded, setExpanded] = useState<boolean[]>([true, true, true, true]);
+  const toggle = (index: number) => setExpanded((prev) => prev.map((v, i) => (i === index ? !v : v)));
+
+  return (
+    <div className="content-stretch flex flex-col gap-[8px] items-start relative w-full" data-name="Market Event Cards">
+      <MarketAccordionCard title="Live Betting 1x2" expanded={expanded[0]} onToggle={() => toggle(0)}>
+        <Market1X2Rows marketId="match-1x2-a" home="Barcelona" away="Manchester" />
+      </MarketAccordionCard>
+      <MarketAccordionCard title="Total Goals O/U" expanded={expanded[1]} onToggle={() => toggle(1)}>
+        <OverUnderRows marketId="match-ou-a" line="1.5" />
+      </MarketAccordionCard>
+      <MarketAccordionCard title="Live Betting 1x2" expanded={expanded[2]} onToggle={() => toggle(2)}>
+        <Market1X2Rows marketId="match-1x2-b" home="Barcelona" away="Manchester" />
+      </MarketAccordionCard>
+      <MarketAccordionCard title="Total Goals O/U" expanded={expanded[3]} onToggle={() => toggle(3)}>
+        <OverUnderRows marketId="match-ou-b" line="1.5" />
+      </MarketAccordionCard>
+    </div>
+  );
+}
+
 function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
   const isMatchPage = useContext(MatchPageContext);
   const [expanded, setExpanded] = useState<boolean[]>([true, true, true, true]);
@@ -8230,7 +8399,7 @@ function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
       {activeTopTab === "live" && !isMatchPage && <TimeFilter />}
       <div className="content-stretch flex flex-col gap-[16px] items-start min-w-[312px] relative shrink-0 w-[380px]" data-name="Matches Feed">
         {!isMatchPage && <Sort allExpanded={allExpanded} onToggleAll={toggleAll} />}
-        <EventCards expanded={expanded} toggle={toggle} />
+        {isMatchPage ? <MarketEventCards /> : <EventCards expanded={expanded} toggle={toggle} />}
       </div>
       <div className="absolute bg-gradient-to-l from-[#070d18] h-[62px] left-[385px] to-[rgba(7,13,24,0)] top-[82px] w-[19px]" data-name="shadow" />
       <div className="absolute bg-gradient-to-l from-[#070d18] h-[34px] left-[385px] to-[rgba(7,13,24,0)] top-[36px] w-[19px]" data-name="shadow" />
