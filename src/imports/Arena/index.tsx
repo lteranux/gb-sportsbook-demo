@@ -1628,12 +1628,90 @@ function LeagueMatchesCarousel() {
   );
 }
 
+// Score Card header (Figma node 18:26946) — sits below the League Matches
+// Carousel with a 16px gap, shown only on Match Page. Reuses the shared
+// LiveTag plus the existing Clock Circular / Favorites Stroke icons and team
+// crest images already in this file.
+function ScoreCardTeam({ crest, name }: { crest: string; name: string }) {
+  return (
+    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-center min-w-px px-[4px] relative self-stretch" data-name="Team">
+      <div className="relative shrink-0 size-[32px]" data-name="Crest">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full" src={crest} />
+      </div>
+      <p className="font-['Inter:Bold',sans-serif] font-bold leading-[18px] relative shrink-0 text-[#e5eafa] text-[14px] text-center w-full">{name}</p>
+    </div>
+  );
+}
+
+function ScoreCardTimeEvent() {
+  return (
+    <div className="content-stretch flex flex-col gap-[8px] items-center relative shrink-0" data-name="Score">
+      <LiveTag withIcon />
+      <div className="content-stretch flex gap-[4px] items-center relative shrink-0" data-name="Score">
+        <div className="bg-[#0e192d] content-stretch flex flex-col h-[28px] items-center justify-center min-w-[18px] px-[8px] py-[2px] relative rounded-[4px] shrink-0 w-[36px]" data-name="Team Score">
+          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[20px] relative shrink-0 text-[#e5eafa] text-[16px] whitespace-nowrap">0</p>
+        </div>
+        <div className="bg-[#0e192d] content-stretch flex flex-col h-[28px] items-center justify-center min-w-[18px] px-[8px] py-[2px] relative rounded-[4px] shrink-0 w-[36px]" data-name="Team Score">
+          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[20px] relative shrink-0 text-[#e5eafa] text-[16px] whitespace-nowrap">0</p>
+        </div>
+      </div>
+      <div className="content-stretch flex gap-[2px] items-center justify-center min-w-[48px] px-[4px] py-[2px] relative rounded-[4px]" data-name="Event Info Time Block">
+        <div className="overflow-clip relative shrink-0 size-[14px]" data-name="Clock Circular">
+          <div className="absolute inset-[8.33%]" data-name="Icon">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 11.6667 11.6667">
+              <path d={svgPaths.p1aa68c00} fill="var(--fill-0, #ACAFBB)" id="Icon" />
+            </svg>
+          </div>
+        </div>
+        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[14px] relative shrink-0 text-[#acafbb] text-[10px] text-center whitespace-nowrap">
+          <span className="font-['Inter:Bold',sans-serif] font-bold">12&rsquo;</span> 1st Half
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ScoreCard() {
+  return (
+    <div
+      className="bg-[#0b1322] border border-[#17274b] border-solid content-stretch flex flex-col gap-[12px] items-center max-w-[380px] min-w-[312px] pb-[12px] pt-[4px] px-[4px] relative rounded-[16px] w-[380px]"
+      data-name="Score Card"
+    >
+      <div
+        className="content-stretch flex gap-[16px] h-[104px] items-start justify-center min-w-[190px] overflow-clip pt-[16px] px-[12px] relative rounded-[16px] shrink-0 w-full"
+        style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 372 104' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(0.0000021045 9.2209 -62.608 0.0000013628 186 0.0000014474)'><stop stop-color='rgba(224,82,0,1)' offset='0'/><stop stop-color='rgba(176,64,0,0.31915)' offset='0.39047'/><stop stop-color='rgba(153,56,0,0)' offset='1'/></radialGradient></defs></svg>\")" }}
+        data-name="Event Info Wrapper"
+      >
+        <div className="content-stretch flex flex-[1_0_0] gap-[12px] items-start justify-center min-w-[298px] relative" data-name="Event Info">
+          <ScoreCardTeam crest={imgImage75} name="USA" />
+          <ScoreCardTimeEvent />
+          <ScoreCardTeam crest={imgImage76} name="Australia" />
+        </div>
+        <button className="absolute block cursor-pointer right-[12px] size-[20px] top-[8px]" data-name="_Like sport" aria-label="Add to favorites">
+          <div className="absolute inset-0 overflow-clip" data-name="Favorites Stroke">
+            <div className="absolute inset-[13.54%_8.33%]" data-name="Icon">
+              <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16.6667 14.5832">
+                <path d={svgPaths.p31fcbd80} fill="var(--fill-0, #E5EAFA)" id="Icon" />
+              </svg>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function Content({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelectTopTab: (tab: TopTab) => void }) {
   const isMatchPage = useContext(MatchPageContext);
   return (
     <div className="content-stretch flex flex-col gap-[20px] items-center relative shrink-0 w-full" data-name="Content">
       {isMatchPage && <Breadcrumb />}
       {isMatchPage && <LeagueMatchesCarousel />}
+      {isMatchPage && (
+        <div className="-mt-[4px] flex justify-center w-full">
+          <ScoreCard />
+        </div>
+      )}
       {!isMatchPage && (
         <div className="relative shrink-0 w-[428px]" data-name="Tab Navigation - Sports">
           <div className="content-stretch flex flex-col items-start overflow-x-auto overflow-y-clip px-[16px] relative rounded-[inherit] size-full">
