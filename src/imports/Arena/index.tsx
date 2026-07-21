@@ -22,7 +22,7 @@ import imgBottomNavigationMobile from "./999dc029575f09683ae54053a49a9f69f397c89
 import { imgGroup } from "./svg-vzcwu";
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { motion } from "motion/react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { OddsButton } from "@/app/components/betting/OddsButton";
 import { ResponsiveCanvas } from "@/app/components/layout/ResponsiveCanvas";
 
@@ -1497,10 +1497,64 @@ function Events() {
   );
 }
 
+// Back-chevron used only in the Breadcrumb — a plain stroke chevron matching
+// the Figma "Back / Previous / Prior" icon, not one of the existing filled
+// nav icons, so it's kept local to this component instead of reused.
+function BackIcon({ onClick }: { onClick?: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="cursor-pointer overflow-clip relative shrink-0 size-[20px]"
+      data-name="Back"
+      aria-label="Go back"
+    >
+      <svg className="absolute block inset-0 size-full" fill="none" viewBox="0 0 24 24">
+        <path d="M15 6l-6 6 6 6" stroke="#7c8397" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </button>
+  );
+}
+
+// Header Breadcrumb (Figma node 18:26935) — shown below the top navigation bar
+// on the Match Page only, in place of the Arena/Live/Prematch tab switcher.
+function BreadcrumbSlash() {
+  return <p className="font-['Inter:Bold',sans-serif] font-bold leading-[18px] relative shrink-0 text-[#7c8397] text-[14px] whitespace-nowrap">/</p>;
+}
+
+function BreadcrumbLabel({ children }: { children: ReactNode }) {
+  return <p className="font-['Inter:Medium',sans-serif] font-medium leading-[18px] relative shrink-0 text-[#7c8397] text-[14px] whitespace-nowrap">{children}</p>;
+}
+
+function Breadcrumb() {
+  const navigate = useNavigate();
+  return (
+    <div className="relative shrink-0 w-[428px]" data-name="Breadcrumb Wrapper">
+      <div className="content-stretch flex gap-[4px] items-center no-scrollbar overflow-x-auto px-[16px] relative rounded-[inherit] size-full" data-name="Header Breadcrumb">
+        <BackIcon onClick={() => navigate(-1)} />
+        <div className="overflow-clip relative shrink-0 size-[20px]" data-name="Stadium">
+          <div className="absolute inset-[6.25%_6.25%_7.65%_6.25%]" data-name="Vector">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 14 13.7763">
+              <path d={svgPaths.p2402b900} fill="var(--fill-0, #7c8397)" />
+            </svg>
+          </div>
+        </div>
+        <BreadcrumbSlash />
+        <BreadcrumbLabel>Soccer</BreadcrumbLabel>
+        <BreadcrumbSlash />
+        <BreadcrumbLabel>England</BreadcrumbLabel>
+        <BreadcrumbSlash />
+        <BreadcrumbLabel>England Premier League</BreadcrumbLabel>
+      </div>
+    </div>
+  );
+}
+
 function Content({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelectTopTab: (tab: TopTab) => void }) {
   const isMatchPage = useContext(MatchPageContext);
   return (
     <div className="content-stretch flex flex-col gap-[20px] items-center relative shrink-0 w-full" data-name="Content">
+      {isMatchPage && <Breadcrumb />}
       {!isMatchPage && (
         <div className="relative shrink-0 w-[428px]" data-name="Tab Navigation - Sports">
           <div className="content-stretch flex flex-col items-start overflow-x-auto overflow-y-clip px-[16px] relative rounded-[inherit] size-full">
