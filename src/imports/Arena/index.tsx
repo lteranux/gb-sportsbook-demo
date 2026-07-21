@@ -1531,14 +1531,20 @@ function Breadcrumb() {
   return (
     <div className="relative shrink-0 w-[428px]" data-name="Breadcrumb Wrapper">
       <div className="content-stretch flex gap-[4px] items-center no-scrollbar overflow-x-auto px-[16px] relative rounded-[inherit] size-full" data-name="Header Breadcrumb">
-        <BackIcon onClick={() => navigate(-1)} />
-        <div className="overflow-clip relative shrink-0 size-[20px]" data-name="Stadium">
+        <BackIcon onClick={() => navigate("/")} />
+        <button
+          type="button"
+          onClick={() => navigate("/")}
+          className="cursor-pointer overflow-clip relative shrink-0 size-[20px]"
+          data-name="Stadium"
+          aria-label="Go to Arena"
+        >
           <div className="absolute inset-[6.25%_6.25%_7.65%_6.25%]" data-name="Vector">
             <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 14 13.7763">
               <path d={svgPaths.p2402b900} fill="var(--fill-0, #7c8397)" />
             </svg>
           </div>
-        </div>
+        </button>
         <BreadcrumbSlash />
         <BreadcrumbLabel>Soccer</BreadcrumbLabel>
         <BreadcrumbSlash />
