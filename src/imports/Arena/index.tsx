@@ -3215,7 +3215,17 @@ const LEAGUE_TAB_HOVER_BG =
 const LEAGUE_TAB_SELECTED_BG =
   "linear-gradient(179.412deg, rgba(255, 148, 87, 0.8) 1.596%, rgba(153, 56, 0, 0.8) 98.637%), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)";
 
-function LeagueTab({ label, selected, fill }: { label: string; selected: boolean; fill?: boolean }) {
+function LeagueTab({
+  label,
+  selected,
+  fill,
+  onSelect,
+}: {
+  label: string;
+  selected: boolean;
+  fill?: boolean;
+  onSelect?: () => void;
+}) {
   const [hovered, setHovered] = useState(false);
   const background = selected ? LEAGUE_TAB_SELECTED_BG : hovered ? LEAGUE_TAB_HOVER_BG : LEAGUE_TAB_DEFAULT_BG;
 
@@ -3223,6 +3233,8 @@ function LeagueTab({ label, selected, fill }: { label: string; selected: boolean
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={onSelect}
+      role={onSelect ? "button" : undefined}
       className={
         "content-stretch flex gap-[4px] h-[34px] items-center justify-center max-w-[200px] px-[16px] py-[8px] relative rounded-[16px] snap-start transition-[background-image] duration-200 cursor-pointer " +
         (fill ? "flex-1 min-w-[101px]" : "shrink-0 w-fit")
@@ -3242,7 +3254,17 @@ function LeagueTab({ label, selected, fill }: { label: string; selected: boolean
   );
 }
 
+// Classic market category tabs (Figma node 34:35708) — shown in place of the
+// league tabs only on Match Page, since here the orange tab row filters the
+// Market Event Cards below by category rather than filtering by league.
+// "All Markets (45)", "Main", "Halves", "Specials" come straight from Figma;
+// Player Props / Corners & Cards / Bookings are added on top per request.
+const CLASSIC_MARKET_TABS = ["All Markets (45)", "Main", "Halves", "Specials", "Player Props", "Corners & Cards", "Bookings"];
+
 function Container11() {
+  const isMatchPage = useContext(MatchPageContext);
+  const [selectedMarketTab, setSelectedMarketTab] = useState(0);
+
   const leagueTabs = [
     { label: "Top League (45)", selected: true },
     { label: "European Games", selected: false },
@@ -3254,9 +3276,18 @@ function Container11() {
 
   return (
     <div className="no-scrollbar content-stretch flex gap-[8px] items-center relative shrink-0 w-[380px] overflow-x-auto snap-x snap-mandatory" data-name="Container">
-      {leagueTabs.map((tab, index) => (
-        <LeagueTab key={`${tab.label}-${index}`} label={tab.label} selected={tab.selected} fill={tab.fill} />
-      ))}
+      {isMatchPage
+        ? CLASSIC_MARKET_TABS.map((label, index) => (
+            <LeagueTab
+              key={`${label}-${index}`}
+              label={label}
+              selected={selectedMarketTab === index}
+              onSelect={() => setSelectedMarketTab(index)}
+            />
+          ))
+        : leagueTabs.map((tab, index) => (
+            <LeagueTab key={`${tab.label}-${index}`} label={tab.label} selected={tab.selected} fill={tab.fill} />
+          ))}
     </div>
   );
 }
@@ -8358,10 +8389,7 @@ function OverUnderRows({ marketId, line }: { marketId: string; line: string }) {
   );
 }
 
-function MarketEventCards() {
-  const [expanded, setExpanded] = useState<boolean[]>([true, true, true, true]);
-  const toggle = (index: number) => setExpanded((prev) => prev.map((v, i) => (i === index ? !v : v)));
-
+function MarketEventCards({ expanded, toggle }: { expanded: boolean[]; toggle: (index: number) => void }) {
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-start relative w-full" data-name="Market Event Cards">
       <MarketAccordionCard title="Live Betting 1x2" expanded={expanded[0]} onToggle={() => toggle(0)}>
@@ -8399,7 +8427,11 @@ function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
       {activeTopTab === "live" && !isMatchPage && <TimeFilter />}
       <div className="content-stretch flex flex-col gap-[16px] items-start min-w-[312px] relative shrink-0 w-[380px]" data-name="Matches Feed">
         {!isMatchPage && <Sort allExpanded={allExpanded} onToggleAll={toggleAll} />}
-        {isMatchPage ? <MarketEventCards /> : <EventCards expanded={expanded} toggle={toggle} />}
+        {isMatchPage ? (
+          <MarketEventCards expanded={expanded} toggle={toggle} />
+        ) : (
+          <EventCards expanded={expanded} toggle={toggle} />
+        )}
       </div>
       <div className="absolute bg-gradient-to-l from-[#070d18] h-[62px] left-[385px] to-[rgba(7,13,24,0)] top-[82px] w-[19px]" data-name="shadow" />
       <div className="absolute bg-gradient-to-l from-[#070d18] h-[34px] left-[385px] to-[rgba(7,13,24,0)] top-[36px] w-[19px]" data-name="shadow" />
@@ -9750,6 +9782,7 @@ function FooterNewColoredIcons() {
 }
 
 function Body({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelectTopTab: (tab: TopTab) => void }) {
+  const isMatchPage = useContext(MatchPageContext);
   return (
     <div className="content-stretch flex flex-col gap-[32px] items-center relative shrink-0 w-full" data-name="Body">
       <Content activeTopTab={activeTopTab} onSelectTopTab={onSelectTopTab} />
@@ -9770,7 +9803,7 @@ function Body({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelect
         </>
       )}
       <GameCardPlayers activeTopTab={activeTopTab} />
-      <Parnetships />
+      {!isMatchPage && <Parnetships />}
       <FooterNewColoredIcons />
     </div>
   );
