@@ -1550,11 +1550,90 @@ function Breadcrumb() {
   );
 }
 
+// League Matches Carousel (Figma node 18:26944) — sits below the Breadcrumb
+// with 16px side padding, shown only on the Match Page.
+type MatchCardData = { team1: string; score1: string; team2: string; score2: string; time: string };
+
+const LEAGUE_MATCHES: MatchCardData[] = [
+  { team1: "Manchester", score1: "1", team2: "Barcelona", score2: "0", time: "33:41 - 14/03" },
+  { team1: "Liverpool", score1: "2", team2: "Real Madrid", score2: "1", time: "58:12 - 14/03" },
+  { team1: "Bayern", score1: "0", team2: "PSG", score2: "0", time: "12:05 - 15/03" },
+  { team1: "Chelsea", score1: "3", team2: "Juventus", score2: "2", time: "77:30 - 15/03" },
+  { team1: "Arsenal", score1: "1", team2: "Inter Milan", score2: "1", time: "41:18 - 16/03" },
+  { team1: "Man City", score1: "2", team2: "AC Milan", score2: "0", time: "5:52 - 16/03" },
+];
+
+function MatchCard({ team1, score1, team2, score2, time }: MatchCardData) {
+  return (
+    <div className="bg-[#17274b] border border-[#17274b] border-solid content-stretch flex flex-col h-[64px] items-center justify-between p-[8px] relative rounded-[8px] shrink-0 w-[94px]" data-name="Match Card">
+      <div className="content-stretch flex flex-col gap-[2px] items-start justify-center relative shrink-0 w-full" data-name="Teams">
+        <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
+          <p className="font-['Inter:Medium',sans-serif] font-medium leading-[14px] relative shrink-0 text-[#e5eafa] text-[10px] whitespace-nowrap">{team1}</p>
+          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[14px] relative shrink-0 text-[#e5eafa] text-[10px] whitespace-nowrap">{score1}</p>
+        </div>
+        <div className="content-stretch flex h-[14px] items-center justify-between relative shrink-0 w-full">
+          <p className="font-['Inter:Medium',sans-serif] font-medium leading-[14px] relative shrink-0 text-[#e5eafa] text-[10px] whitespace-nowrap">{team2}</p>
+          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[14px] relative shrink-0 text-[#e5eafa] text-[10px] whitespace-nowrap">{score2}</p>
+        </div>
+      </div>
+      <div className="content-stretch flex gap-[4px] items-center justify-center min-w-[48px] relative shrink-0" data-name="Event Info Time Block">
+        <div className="overflow-clip relative shrink-0 size-[14px]" data-name="Clock Circular">
+          <div className="absolute inset-[8.33%]" data-name="Icon">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 11.6667 11.6667">
+              <path d={svgPaths.p1aa68c00} fill="var(--fill-0, #ACAFBB)" id="Icon" />
+            </svg>
+          </div>
+        </div>
+        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[14px] relative shrink-0 text-[#acafbb] text-[10px] text-center whitespace-nowrap">{time}</p>
+      </div>
+    </div>
+  );
+}
+
+function AllMatchesPill() {
+  return (
+    <div className="flex flex-row items-center self-stretch" data-name="All Pill Wrapper">
+      <div
+        className="border border-[#e5eafa] border-solid content-stretch flex flex-col gap-[4px] h-full items-center pb-[8px] pt-[8px] px-[4px] relative rounded-[16px] shrink-0 w-[60px]"
+        style={{ backgroundImage: "linear-gradient(177.96deg, rgba(25, 100, 250, 0.2) 1.6%, rgba(8, 54, 148, 0.2) 98.6%), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)" }}
+        data-name="Menu Accordion Option Item"
+      >
+        <div className="content-stretch flex items-center justify-center relative shrink-0 size-[32px]" data-name="Icon">
+          <div className="overflow-clip relative shrink-0 size-[24px]" data-name="All Games">
+            <div className="absolute inset-[12.5%]" data-name="Icon">
+              <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 15 15">
+                <path d={svgPaths.p1ec82180} fill="var(--fill-0, #E5EAFA)" id="Icon" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <p className="font-['Inter:Bold',sans-serif] font-bold leading-[18px] relative shrink-0 text-[#f2f5fd] text-[14px] text-center whitespace-nowrap">All</p>
+      </div>
+    </div>
+  );
+}
+
+function LeagueMatchesCarousel() {
+  return (
+    <div className="relative shrink-0 w-[428px]" data-name="Leage Matches Carousel Wrapper">
+      <div className="content-stretch flex gap-[4px] items-center px-[16px] relative size-full">
+        <AllMatchesPill />
+        <div className="content-stretch flex flex-[1_0_0] gap-[4px] h-[70px] items-center min-w-px no-scrollbar overflow-x-auto overflow-y-clip relative" data-name="Carousel">
+          {LEAGUE_MATCHES.map((m, i) => (
+            <MatchCard key={i} {...m} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Content({ activeTopTab, onSelectTopTab }: { activeTopTab: TopTab; onSelectTopTab: (tab: TopTab) => void }) {
   const isMatchPage = useContext(MatchPageContext);
   return (
     <div className="content-stretch flex flex-col gap-[20px] items-center relative shrink-0 w-full" data-name="Content">
       {isMatchPage && <Breadcrumb />}
+      {isMatchPage && <LeagueMatchesCarousel />}
       {!isMatchPage && (
         <div className="relative shrink-0 w-[428px]" data-name="Tab Navigation - Sports">
           <div className="content-stretch flex flex-col items-start overflow-x-auto overflow-y-clip px-[16px] relative rounded-[inherit] size-full">
