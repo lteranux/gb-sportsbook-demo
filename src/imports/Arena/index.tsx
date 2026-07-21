@@ -1565,7 +1565,7 @@ const LEAGUE_MATCHES: MatchCardData[] = [
 
 function MatchCard({ team1, score1, team2, score2, time }: MatchCardData) {
   return (
-    <div className="bg-[#17274b] border border-[#17274b] border-solid content-stretch flex flex-col h-[64px] items-center justify-between p-[8px] relative rounded-[8px] shrink-0 w-[94px]" data-name="Match Card">
+    <div className="bg-[#17274b] hover:bg-[#0e192d] transition-colors duration-150 cursor-pointer border border-[#17274b] border-solid content-stretch flex flex-col h-[64px] items-center justify-between p-[8px] relative rounded-[8px] shrink-0 w-[94px]" data-name="Match Card">
       <div className="content-stretch flex flex-col gap-[2px] items-start justify-center relative shrink-0 w-full" data-name="Teams">
         <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
           <p className="font-['Inter:Medium',sans-serif] font-medium leading-[14px] relative shrink-0 text-[#e5eafa] text-[10px] whitespace-nowrap">{team1}</p>
