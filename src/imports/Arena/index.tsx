@@ -8120,6 +8120,97 @@ function EventCards({ expanded, toggle }: { expanded: boolean[]; toggle: (index:
   );
 }
 
+// Bet Builder toggle used only in the Sort bar below (Figma node 26:35324).
+function BetBuilderToggle() {
+  const [on, setOn] = useState(false);
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={on}
+      aria-label="Toggle Bet Builder"
+      onClick={() => setOn((v) => !v)}
+      className="content-stretch flex gap-[8px] h-[32px] items-center relative shrink-0 cursor-pointer"
+      data-name="Sorting Switch"
+    >
+      <div
+        className="content-stretch flex items-center p-[4px] relative rounded-[100px] shrink-0 w-[40px] h-[24px]"
+        style={{
+          backgroundImage: on
+            ? "linear-gradient(179.412deg, rgba(255, 148, 87, 0.8) 1.596%, rgba(153, 56, 0, 0.8) 98.637%), linear-gradient(90deg, rgb(14, 25, 45) 0%, rgb(14, 25, 45) 100%)"
+            : "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 40 24' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.5482e-14 2.4061 -4.8657 1.3358e-13 20 -5.4889e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(23, 39, 75) 0%, rgb(23, 39, 75) 100%)",
+        }}
+        data-name="Switch"
+      >
+        <motion.div
+          className="bg-[#e5eafa] rounded-[100px] shrink-0 size-[16px]"
+          animate={{ x: on ? 16 : 0 }}
+          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        />
+      </div>
+      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[18px] relative shrink-0 text-[#e5eafa] text-[14px] text-left whitespace-nowrap">
+        Bet Builder
+      </p>
+    </button>
+  );
+}
+
+function MarketSearchButton() {
+  return (
+    <button
+      type="button"
+      aria-label="Search markets"
+      className="content-stretch flex items-center justify-center px-[16px] py-[8px] relative rounded-[16px] shrink-0 size-[32px] cursor-pointer"
+      style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.0386e-14 3.2081 -3.8926 1.781e-13 16 -7.3186e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(23, 39, 75) 0%, rgb(23, 39, 75) 100%)" }}
+    >
+      <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Search">
+        <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 18.001 18">
+          <path d={svgPaths.p1b281800} fill="var(--fill-0, #E5EAFA)" id="Icon" />
+        </svg>
+      </div>
+    </button>
+  );
+}
+
+// Sort (Figma node 26:35324) — Bet Builder toggle, market search, and collapse-all,
+// shown below the orange League tabs (Container11) only on Match Page. The
+// collapse-all button shares state with the Market Type Sort below it, so
+// both stay in sync.
+function MatchPageSort({ allExpanded, onToggleAll }: { allExpanded: boolean; onToggleAll: () => void }) {
+  return (
+    <div className="content-stretch cursor-pointer flex items-start justify-between relative w-full" data-name="Sort">
+      <BetBuilderToggle />
+      <div className="content-stretch flex flex-1 gap-[4px] items-center justify-end min-w-px relative self-stretch" data-name="Sort">
+        <MarketSearchButton />
+        <motion.button
+          type="button"
+          onClick={onToggleAll}
+          whileTap={{ scale: 0.9 }}
+          aria-label={allExpanded ? "Collapse all markets" : "Expand all markets"}
+          aria-pressed={allExpanded}
+          className="content-stretch flex h-full items-center justify-center px-[16px] py-[8px] relative rounded-[16px] shrink-0 w-[32px] cursor-pointer"
+          style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.0386e-14 3.2081 -3.8926 1.781e-13 16 -7.3186e-13)'><stop stop-color='rgba(229,234,250,0.2)' offset='0'/><stop stop-color='rgba(229,234,250,0)' offset='0.3'/><stop stop-color='rgba(7,13,24,0)' offset='0.6'/><stop stop-color='rgba(7,13,24,0.5)' offset='1'/></radialGradient></defs></svg>\"), linear-gradient(90deg, rgb(23, 39, 75) 0%, rgb(23, 39, 75) 100%)" }}
+          data-name="Icon"
+        >
+          <motion.div
+            animate={{ rotate: allExpanded ? 180 : 0 }}
+            transition={{ type: "spring", stiffness: 400, damping: 28 }}
+            className="overflow-clip relative shrink-0 size-[16px]"
+            data-name="Collapse all"
+          >
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12.0142 11.4998">
+              <g id="Icon">
+                <path d={svgPaths.p17310d00} fill="var(--fill-0, #E5EAFA)" />
+                <path d={svgPaths.p2f926300} fill="var(--fill-0, #E5EAFA)" />
+              </g>
+            </svg>
+          </motion.div>
+        </motion.button>
+      </div>
+    </div>
+  );
+}
+
 function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
   const isMatchPage = useContext(MatchPageContext);
   const [expanded, setExpanded] = useState<boolean[]>([true, true, true, true]);
@@ -8134,6 +8225,7 @@ function GameCardPlayers({ activeTopTab }: { activeTopTab: TopTab }) {
       <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Tab Navigation - Sports">
         <Container11 />
       </div>
+      {isMatchPage && <MatchPageSort allExpanded={allExpanded} onToggleAll={toggleAll} />}
       {activeTopTab === "prematch" && !isMatchPage && <DateFilter />}
       {activeTopTab === "live" && !isMatchPage && <TimeFilter />}
       <div className="content-stretch flex flex-col gap-[16px] items-start min-w-[312px] relative shrink-0 w-[380px]" data-name="Matches Feed">
