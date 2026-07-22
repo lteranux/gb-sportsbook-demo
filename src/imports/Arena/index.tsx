@@ -539,25 +539,62 @@ function Container1() {
   );
 }
 
+// Percentage market bars (Figma nodes 35:35861/35876/35881 — High/Medium/Low)
+// shown under each odds line of the top Events carousel "AccaBoost" cards to
+// give a rough implied-probability read at a glance.
+function MarketsBar({ level }: { level: "high" | "medium" | "low" }) {
+  const fillPct = level === "high" ? "91.68%" : level === "medium" ? "54.79%" : "25.4%";
+  const gradientFrom = level === "high" ? "#00ff6a" : level === "medium" ? "#ffde3c" : "red";
+  const gradientTo = level === "high" ? "#00672b" : level === "medium" ? "#5f5217" : "#8a0018";
+  return (
+    <div className="bg-[#070d18] h-[4px] overflow-clip relative rounded-[4px] w-[41px]" data-name="Markets Bar">
+      <div
+        className="absolute h-full left-0 rounded-[100px] top-0"
+        style={{ width: fillPct, backgroundImage: `linear-gradient(180deg, ${gradientFrom} 0%, ${gradientTo} 100%)` }}
+        data-name="Bar"
+      />
+    </div>
+  );
+}
+
+function MarketsBarsRow() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full" data-name="Markets Bars">
+      <div className="flex flex-1 justify-center min-w-px">
+        <MarketsBar level="low" />
+      </div>
+      <div className="flex flex-1 justify-center min-w-px">
+        <MarketsBar level="high" />
+      </div>
+      <div className="flex flex-1 justify-center min-w-px">
+        <MarketsBar level="medium" />
+      </div>
+    </div>
+  );
+}
+
 function BetInputs() {
   const marketId = "market-1";
   const marketLabel = "Match Winner";
   return (
-    <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full" data-name="bet inputs">
-      <OddsButton
-        layout="horizontal"
-        trend="up"
-        selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
-      />
-      <OddsButton
-        layout="horizontal"
-        selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
-      />
-      <OddsButton
-        layout="horizontal"
-        trend="down"
-        selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
-      />
+    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full" data-name="bet inputs">
+      <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full">
+        <OddsButton
+          layout="horizontal"
+          trend="up"
+          selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
+        />
+        <OddsButton
+          layout="horizontal"
+          selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
+        />
+        <OddsButton
+          layout="horizontal"
+          trend="down"
+          selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
+        />
+      </div>
+      <MarketsBarsRow />
     </div>
   );
 }
@@ -762,21 +799,24 @@ function BetInputs1() {
   const marketId = "market-2";
   const marketLabel = "Live Betting 1X2";
   return (
-    <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full" data-name="bet inputs">
-      <OddsButton
-        layout="horizontal"
-        trend="up"
-        selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
-      />
-      <OddsButton
-        layout="horizontal"
-        selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
-      />
-      <OddsButton
-        layout="horizontal"
-        trend="down"
-        selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
-      />
+    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full" data-name="bet inputs">
+      <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full">
+        <OddsButton
+          layout="horizontal"
+          trend="up"
+          selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
+        />
+        <OddsButton
+          layout="horizontal"
+          selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
+        />
+        <OddsButton
+          layout="horizontal"
+          trend="down"
+          selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
+        />
+      </div>
+      <MarketsBarsRow />
     </div>
   );
 }
@@ -981,21 +1021,24 @@ function BetInputs2() {
   const marketId = "market-3";
   const marketLabel = "Live Betting 1X2";
   return (
-    <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full" data-name="bet inputs">
-      <OddsButton
-        layout="horizontal"
-        trend="up"
-        selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
-      />
-      <OddsButton
-        layout="horizontal"
-        selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
-      />
-      <OddsButton
-        layout="horizontal"
-        trend="down"
-        selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
-      />
+    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full" data-name="bet inputs">
+      <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full">
+        <OddsButton
+          layout="horizontal"
+          trend="up"
+          selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
+        />
+        <OddsButton
+          layout="horizontal"
+          selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
+        />
+        <OddsButton
+          layout="horizontal"
+          trend="down"
+          selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
+        />
+      </div>
+      <MarketsBarsRow />
     </div>
   );
 }
@@ -1200,21 +1243,24 @@ function BetInputs3() {
   const marketId = "market-4";
   const marketLabel = "Live Betting 1X2";
   return (
-    <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full" data-name="bet inputs">
-      <OddsButton
-        layout="horizontal"
-        trend="up"
-        selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
-      />
-      <OddsButton
-        layout="horizontal"
-        selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
-      />
-      <OddsButton
-        layout="horizontal"
-        trend="down"
-        selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
-      />
+    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full" data-name="bet inputs">
+      <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full">
+        <OddsButton
+          layout="horizontal"
+          trend="up"
+          selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
+        />
+        <OddsButton
+          layout="horizontal"
+          selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
+        />
+        <OddsButton
+          layout="horizontal"
+          trend="down"
+          selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
+        />
+      </div>
+      <MarketsBarsRow />
     </div>
   );
 }
@@ -1419,21 +1465,24 @@ function BetInputs4() {
   const marketId = "market-5";
   const marketLabel = "Live Betting 1X2";
   return (
-    <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full" data-name="bet inputs">
-      <OddsButton
-        layout="horizontal"
-        trend="up"
-        selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
-      />
-      <OddsButton
-        layout="horizontal"
-        selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
-      />
-      <OddsButton
-        layout="horizontal"
-        trend="down"
-        selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
-      />
+    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full" data-name="bet inputs">
+      <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full">
+        <OddsButton
+          layout="horizontal"
+          trend="up"
+          selection={{ id: `${marketId}-1`, marketId, marketLabel, meaning: "1", odds: "5.50" }}
+        />
+        <OddsButton
+          layout="horizontal"
+          selection={{ id: `${marketId}-x`, marketId, marketLabel, meaning: "x", odds: "0.30" }}
+        />
+        <OddsButton
+          layout="horizontal"
+          trend="down"
+          selection={{ id: `${marketId}-2`, marketId, marketLabel, meaning: "2", odds: "3.10" }}
+        />
+      </div>
+      <MarketsBarsRow />
     </div>
   );
 }
