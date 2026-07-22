@@ -547,7 +547,7 @@ function MarketsBar({ level }: { level: "high" | "medium" | "low" }) {
   const gradientFrom = level === "high" ? "#00ff6a" : level === "medium" ? "#ffde3c" : "red";
   const gradientTo = level === "high" ? "#00672b" : level === "medium" ? "#5f5217" : "#8a0018";
   return (
-    <div className="bg-[#070d18] h-[4px] overflow-clip relative rounded-[4px] w-full" data-name="Markets Bar">
+    <div className="bg-[#070d18] h-[4px] overflow-clip relative rounded-[4px] w-[80%] mx-auto" data-name="Markets Bar">
       <div
         className="absolute h-full left-0 rounded-[100px] top-0"
         style={{ width: fillPct, backgroundImage: `linear-gradient(180deg, ${gradientFrom} 0%, ${gradientTo} 100%)` }}
