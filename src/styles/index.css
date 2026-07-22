@@ -23,8 +23,8 @@
 .market-bar-shimmer {
   background-image: repeating-linear-gradient(
     -45deg,
-    rgba(255, 255, 255, 0.4) 0px,
-    rgba(255, 255, 255, 0.4) 3px,
+    rgba(10, 20, 60, 0.1) 0px,
+    rgba(10, 20, 60, 0.1) 3px,
     transparent 3px,
     transparent 24px
   );
