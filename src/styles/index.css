@@ -17,17 +17,17 @@
     background-position: 0 0;
   }
   to {
-    background-position: 12px 0;
+    background-position: 24px 0;
   }
 }
 .market-bar-shimmer {
   background-image: repeating-linear-gradient(
     -45deg,
     rgba(255, 255, 255, 0.4) 0px,
-    rgba(255, 255, 255, 0.4) 2px,
-    transparent 2px,
-    transparent 6px
+    rgba(255, 255, 255, 0.4) 3px,
+    transparent 3px,
+    transparent 24px
   );
-  background-size: 12px 12px;
-  animation: barber-pole 0.6s linear infinite;
+  background-size: 24px 24px;
+  animation: barber-pole 2.4s linear infinite;
 }
