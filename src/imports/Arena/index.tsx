@@ -547,7 +547,7 @@ function MarketsBar({ level }: { level: "high" | "medium" | "low" }) {
   const gradientFrom = level === "high" ? "#00ff6a" : level === "medium" ? "#ffde3c" : "red";
   const gradientTo = level === "high" ? "#00672b" : level === "medium" ? "#5f5217" : "#8a0018";
   return (
-    <div className="bg-[#070d18] h-[4px] overflow-clip relative rounded-[4px] w-[41px]" data-name="Markets Bar">
+    <div className="bg-[#070d18] h-[4px] overflow-clip relative rounded-[4px] w-full" data-name="Markets Bar">
       <div
         className="absolute h-full left-0 rounded-[100px] top-0"
         style={{ width: fillPct, backgroundImage: `linear-gradient(180deg, ${gradientFrom} 0%, ${gradientTo} 100%)` }}
@@ -560,13 +560,13 @@ function MarketsBar({ level }: { level: "high" | "medium" | "low" }) {
 function MarketsBarsRow() {
   return (
     <div className="content-stretch flex gap-[4px] items-center relative shrink-0 w-full" data-name="Markets Bars">
-      <div className="flex flex-1 justify-center min-w-px">
+      <div className="flex flex-1 min-w-px">
         <MarketsBar level="low" />
       </div>
-      <div className="flex flex-1 justify-center min-w-px">
+      <div className="flex flex-1 min-w-px">
         <MarketsBar level="high" />
       </div>
-      <div className="flex flex-1 justify-center min-w-px">
+      <div className="flex flex-1 min-w-px">
         <MarketsBar level="medium" />
       </div>
     </div>
