@@ -549,10 +549,12 @@ function MarketsBar({ level }: { level: "high" | "medium" | "low" }) {
   return (
     <div className="bg-[#070d18] h-[4px] overflow-clip relative rounded-[4px] w-[90%] mx-auto" data-name="Markets Bar">
       <div
-        className="absolute h-full left-0 rounded-[100px] top-0"
+        className="absolute h-full left-0 rounded-[100px] top-0 overflow-hidden"
         style={{ width: fillPct, backgroundImage: `linear-gradient(180deg, ${gradientFrom} 0%, ${gradientTo} 100%)` }}
         data-name="Bar"
-      />
+      >
+        <div className="absolute inset-0 market-bar-shimmer" />
+      </div>
     </div>
   );
 }
